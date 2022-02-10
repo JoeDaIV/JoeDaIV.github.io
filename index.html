@@ -19,8 +19,10 @@
         nav {
             background: rgb(0, 0, 0);
            margin: 0 auto;
+           margin: 20px;
             display: flex;
             padding: 10px;
+            border:solid rgb(247, 250, 72)
         }
         h1 {
             display: flex;
@@ -52,6 +54,7 @@
         }
         .sidebar-img {
             width: 235px;
+            border:solid rgb(190, 190, 190)
         }
         .content {
             flex: 1;
@@ -70,14 +73,14 @@
 <body>
     <!-- Div holds everything else(all visible content)-->
     <h1>Welcome to my death trap of a website muwahahahahaa</h1>
-    <div>
+    <div id="all-content">
         <nav>
             <h1>Tsukuyomi no website</hi>
-                <ul>
-                    <li>
+                <ul id="nav-ul">
+                    <li class="nav-li">
                         <a href="index.html"> Home</a>
                     </li>
-                    <li>
+                    <li class="nav-li">
                         <a href="index.html"> Portfolio</a>
                     </li>
                 </ul>
@@ -85,15 +88,15 @@
         </nav>
         <main>
             <!-- Sidebar section/image -->
-            <div>
-                <img src="https://lh3.googleusercontent.com/pagyEFQc5-2G5uNPAlGhDTXL0h65nE6UILn4pto4qe_vIPvXAXXGHVzpS84km8jjPlnC69M=s355"
+            <div class="sidebar">
+                <img class="sidebar-img"src="https://lh3.googleusercontent.com/pagyEFQc5-2G5uNPAlGhDTXL0h65nE6UILn4pto4qe_vIPvXAXXGHVzpS84km8jjPlnC69M=s355"
                     </div>
                 <!-- Content section -->
-                <div>
+                <div class="content">
                     <h2>Joseph Davenport IV</h2>
                     <p> Sophmore at Living School</p>
                     <!-- Interest section -->
-                    <div>
+                    <div id="interests">
                         <h3>Interest</h3>
                         <ul>
                             <li>Japan</li>
