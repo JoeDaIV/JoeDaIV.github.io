@@ -8,8 +8,8 @@
         db: {assetKey: 'db', points: 10},
         max: {assetKey: 'max', points: 20},
         steve: {assetKey: 'steve', points: 30},
-        grace: {assetKey: 'grace', points: 40},
-        kennedi: {assetKey: 'kennedi', points: 50}
+        sparzk: {assetKey: 'sparzk', points: 40},
+        bumbleb: {assetKey: 'bumbleb', points: 50}
     };
     
     /**
@@ -37,8 +37,9 @@
         // ALL YOUR CODE GOES BELOW HERE ///////////////////////////////////////
         
         // example: 
-        createCollectable(type.steve, 200, 170, 6, 0.7);
-        
+        createCollectable(type.steve, 180, 150, 6, 0);
+        createCollectable(type.sparzk, 430, 170, 6, 0);
+        createCollectable(type.bumbleb, 630, 280, 6, 0);
         
         
         // ALL YOUR CODE GOES ABOVE HERE ///////////////////////////////////////
