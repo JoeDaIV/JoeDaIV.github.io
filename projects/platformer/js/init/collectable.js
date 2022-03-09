@@ -5,8 +5,8 @@
     let collectable = window.opspark.collectable;
 
     let type = {
-        dub: {assetKey: 'dub', points: 10},
-        find: {assetKey: 'find', points: 20},
+        dub: {assetKey: 'dub', points: 50},
+        find: {assetKey: 'find', points: 30},
         stead: {assetKey: 'stead', points: 30},
         sparzk: {assetKey: 'sparzk', points: 40},
         bumbleb: {assetKey: 'bumbleb', points: 50}
