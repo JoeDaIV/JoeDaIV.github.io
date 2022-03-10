@@ -6,9 +6,9 @@
 	<script src="jquery.min.js"></script>
 	<style>
 		.box {
-			width: 70px;
+			width: 120px;
 			height: 70px;
-			background-color: teal;
+			background-color: rgb(233, 43, 18);
 			font-size: 300%;
 			text-align: center;
 			display: block;
@@ -49,6 +49,7 @@
 			// moves the Box to a new position on the screen along the X-Axis
 			function moveBoxTo(newPositionX) {
 				box.css("left", newPositionX);
+				console.log('the box was just moved')
 			}
 
 			// changes the text displayed on the Box
@@ -56,12 +57,16 @@
 				box.text(newText);
 			}
 
+
+			moveBoxTo(boardWidth);
+
 			//////////////////////////////////////////////////////////////////
 			/////////////////// YOUR CODE BELOW HERE /////////////////////////
 			//////////////////////////////////////////////////////////////////
 			
 			// TODO 2 - Variable declarations 
-			
+
+			var location = 0;
 
 			
 			/* 
@@ -70,7 +75,10 @@
 			turn it around! 
 			*/
 			function update() {
-				
+				console.log('update was called')
+				moveBoxTo(location);
+				location = location + 10;
+
 
 			};
 
@@ -80,6 +88,7 @@
 			the left side of the screen.
 			*/
 			function handleBoxClick() {
+			console.log("Hey")
 				
 
 
