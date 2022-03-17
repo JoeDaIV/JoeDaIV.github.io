@@ -79,6 +79,9 @@
 			function update() {
 				moveBoxTo(location);
 				location = location + speed;
+			if (newPositionX > boardWidth ) {
+				speed = -speed;
+			}
 
 
 			};
