@@ -20,6 +20,7 @@
 		}
 
 		.board {
+
 			height: 100vh;
 		}
 	</style>
@@ -51,9 +52,10 @@
 			box.on('click', handleBoxClick);
 
 			// moves the Box to a new position on the screen along the X-Axis
-			function moveBoxTo(newPositionX) {
-				box.css("left", newPositionX);
 
+			function moveBoxTo(newPositionX, newPositionY) {
+				box.css('left', newPositionX);
+				box.css('top', newPositionY);
 			}
 
 			// changes the text displayed on the Box
@@ -69,9 +71,14 @@
 
 			// TODO 2 - Variable declarations 
 
-			var location = 0;
+			var positionX = 0;
 			var points = 0;
 			var speed = 10;
+			var positionY = 0;
+			var speedY = 10;
+			var boardHeight = jQuery(window).height();
+			var randNum = Math.random() * 100;
+
 
 
 			/* 
@@ -80,21 +87,34 @@
 			turn it around! 
 			*/
 			function update() {
-				moveBoxTo(location);
-				location = location + speed;
-				if (location >= boardWidth) {
+				moveBoxTo(positionX);
+				positionX = positionX + speed;
+				if (positionX >= boardWidth) {
 					console.log('1: ', speed)
 					speed = speed + -1;
 					console.log('2: ', speed)
 
 
 				}
-				if (location < 0) {
+				if (positionX < 0) {
 					console.log(speed)
 					speed = speed * -1;
 
 					console.log(speed)
 				}
+				moveBoxTo(positionX, positionY);
+				positionY = positionY + speedY;
+				if (positionY >= boardHeight) {
+					console.log('1: ', speedY)
+					speedY = speedY + -1;
+					console.log('2: ', speedY)
+				}
+				if (positionY < 0) {
+					console.log(speedY)
+					speedY = speedY * -1;
+					console.log(speedY)
+				}
+
 
 
 			};
@@ -105,7 +125,7 @@
 			the left side of the screen.
 			*/
 			function handleBoxClick() {
-				location = 0
+				positionX = 0
 				changeBoxText(points);
 				points = points + 1;
 				speed = speed + 3;
@@ -115,7 +135,15 @@
 				else if (speed === -3) {
 					speed -= -speed - 3;
 				}
-
+				positionY = 0
+				changeBoxText(points);
+				speedY = speedY + 3;
+				if (speedY === 3) {
+					speed += 3;
+				}
+				else if (speedY === -3) {
+					speed -= -speed - 3;
+				}
 
 
 			};
