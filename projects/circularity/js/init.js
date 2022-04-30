@@ -23,6 +23,7 @@ var init = function (window) {
         // TODO 1: Declare our variables //
         var circle;
         var circles = [];
+        var rightEdge = circle.x + circle.radius;
 
         // TODO 2 : Create a function that draws a circle 
         function drawCircle() {
@@ -30,10 +31,9 @@ var init = function (window) {
             physikz.addRandomVelocity(circle, canvas);
             view.addChild(circle);
             circles.push(circle);
-
         }
 
-
+        
         // TODO 3 / 8 : Call the drawCircle() function 
         physikz.addRandomVelocity(circle, canvas, 10, 10);
         physikz.addRandomVelocity(circle, canvas, 10, 10);
@@ -84,6 +84,19 @@ var init = function (window) {
         if (circle.x > canvas.width) {
             circle.x = 0;
         }
+        // if the circle has gone past the left of side the screen then place it on the right
+        if (circle.x < 0) {
+            circle.x = canvas.width;
+        }
+        // if the cirlce has gone too far down the screen then place it at the top
+        if (circle.y > canvas.height) {
+            circle.y = 0;
+        }
+        // if the circle has gone too far up the screen then place it at the bottom
+        if (circle.y < 0) {
+            circle.y = canvas.height;
+        }
+
 
         // TODO 7 : YOUR CODE STARTS HERE //////////////////////
 
@@ -106,7 +119,6 @@ var init = function (window) {
 
     app.addUpdateable(window.opspark.game);
 }
-};
 
 // DON'T REMOVE THIS CODE //////////////////////////////////////////////////////
 if ((typeof process !== 'undefined') &&
