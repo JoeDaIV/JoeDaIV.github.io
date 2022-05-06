@@ -129,20 +129,20 @@
 				changeBoxText(points);
 				points = points + 1;
 				speed = speed + 3;
-				if (speed === 3) {
+				if (speed >= 1) {
 					speed += 3;
 				}
-				else if (speed === -3) {
-					speed -= -speed - 3;
+				else if (speed <= 0) {
+					speed -= 3;
 				}
 				positionY = 0
 				changeBoxText(points);
 				speedY = speedY + 3;
-				if (speedY === 3) {
-					speed += 3;
+				if (speedY >= 1) {
+					speedY += 3;
 				}
-				else if (speedY === -3) {
-					speed -= -speed - 3;
+				else if (speedY <= 0) {
+					speedY -= 3;
 				}
 
 
