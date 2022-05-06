@@ -37,11 +37,11 @@
         // ALL YOUR CODE GOES BELOW HERE ///////////////////////////////////////
         
         // example: 
-        createCollectable(type.stead, 180, 280, 6, 0);
-        createCollectable(type.sparzk, 430, 170, 6, 0);
-        createCollectable(type.bumbleb, 630, 280, 6, 0);
-        createCollectable(type.find, 820, 450, 6, 0);
-        createCollectable(type.dub, 0, 450, 6, 0);
+        createCollectable(type.stead, 180, 230, 6, 0);
+        createCollectable(type.sparzk, 430, 140, 6, 0);
+        createCollectable(type.bumbleb, 630, 240, 6, 0);
+        createCollectable(type.find, 820, 410, 6, 0);
+        createCollectable(type.dub, 0, 410, 6, 0);
         
         
         // ALL YOUR CODE GOES ABOVE HERE ///////////////////////////////////////
