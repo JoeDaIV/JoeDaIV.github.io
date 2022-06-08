@@ -11,7 +11,7 @@ body {
   position: relative;
 }
 
-#walker {
+#walker1 {
   background-color: teal;
   width: 50px;
   height: 50px;
@@ -19,4 +19,13 @@ body {
   border-radius: 100px;
 /*   left: 100px; */  /* Uncomment if you want to set a "starting" position */
 /*   top: 100px;  */  /* Uncomment if you want to set a "starting" position */
+}
+#tag2 {
+  background-color: aqua;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  border-radius: 100px;
+  top: 0px;
+  right: 0px;
 }
