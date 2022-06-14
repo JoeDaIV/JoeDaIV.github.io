@@ -46,55 +46,75 @@ function runProgram(){
   // core logic 
   function handleKeyDown(event){
     if(event.which === keyRight.UP){
-      ySpeed += -5;
+      ySpeed = -5;
       // console.log("Up arrow pressed");
     }
     else if(event.which === keyRight.DOWN) {
-      ySpeed += 5;
+      ySpeed = 5;
       // console.log("Down arrow pressed");
     }
     else if(event.which === keyRight.LEFT) {
-      xSpeed += -5;
+      xSpeed = -5;
       // console.log("Left arrow pressed");
     }
     else if(event.which === keyRight.RIGHT) {
-      xSpeed += 5;
+      xSpeed = 5;
       //console.log("Right arrow pressed");
     }
     else if(event.which === keyLeft.A){
-      xSpeed += -5;
+      xSpeed = -5;
     }
     else if(event.which === keyLeft.D){
-      xSpeed += 5;
+      xSpeed = 5;
     }
     else if(event.which === keyLeft.W){
-      ySpeed += -5;
+      ySpeed = -5;
     }
     else if(event.which === keyLeft.S){
-      ySpeed += 5;
+      ySpeed = 5;
     }
 
   }
-  function handleKeyUp() {
-    if(keyRight.UP !== handleKeyDown) {
+  function handleKeyUp(event) {
+    if(keyRight.UP === event.which) {
       ySpeed = 0;
-    }else{
-      ySpeed += -5;
+    } else{
+      ySpeed = -5;
     }
-    if(keyRight.LEFT !== handleKeyDown){
-      xSpeed = 0;
-    }else {
-      xSpeed += 5;
-    }
-    if(keyLeft.W !== handleKeyDown){
+    if(keyRight.DOWN === event.which) {
       ySpeed = 0;
-    }else {
-      ySpeed += -5;
+    } else{
+      ySpeed = 5;
     }
-    if(keyLeft.A !== handleKeyDown){
+    if(keyRight.LEFT === event.which){
       xSpeed = 0;
-    }else {
-      xSpeed += 5;
+    } else {
+      xSpeed = -5;
+    }
+    if(keyRight.RIGHT === event.which){
+      xSpeed = 0;
+    } else {
+      xSpeed = 5;
+    }
+    if(keyLeft.W === event.which){
+      ySpeed = 0;
+    } else{
+      ySpeed = -5;
+    }
+    if(keyLeft.S === event.which) {
+      ySpeed = 0;
+    } else{
+      ySpeed = 5;
+    }
+    if(keyLeft.A === event.which){
+      xSpeed = 0;
+    } else {
+      xSpeed = -5;
+    }
+    if(keyLeft.D === event.which){
+      xSpeed = 0;
+    } else{
+      xSpeed = 5;
     }
   }
 
