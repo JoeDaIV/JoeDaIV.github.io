@@ -51,20 +51,20 @@ function applyFilterNoBackground(filterFunction) {
 }
 
 // TODO 5: Create the keepInBounds function
-function keepInBounds(a) {
+function keepInBounds(a) { // creating a range/boudary for my colors
     var low = Math.max(a, 0);
     var high = Math.min(low, 255);
     return high;
 }
 
 // TODO 3: Create reddify function
-function reddify(rArr) {
+function reddify(rArr) { // changing red's color
     rArr[RED] = 200;
 
 }
 
 // TODO 6: Create more filter functions
-function decreaseBlue(dbArr) {
+function decreaseBlue(dbArr) { // more filters to change mario's color
     dbArr[BLUE] = keepInBounds(dbArr[BLUE] - 50);
 }
 function increaseGreenByBlue(gArr) {

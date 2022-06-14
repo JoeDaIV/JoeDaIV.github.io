@@ -78,15 +78,23 @@ function runProgram(){
   function handleKeyUp() {
     if(keyRight.UP !== handleKeyDown) {
       ySpeed = 0;
+    }else{
+      ySpeed += -5;
     }
     if(keyRight.LEFT !== handleKeyDown){
       xSpeed = 0;
+    }else {
+      xSpeed += 5;
     }
     if(keyLeft.W !== handleKeyDown){
       ySpeed = 0;
+    }else {
+      ySpeed += -5;
     }
     if(keyLeft.A !== handleKeyDown){
       xSpeed = 0;
+    }else {
+      xSpeed += 5;
     }
   }
 
