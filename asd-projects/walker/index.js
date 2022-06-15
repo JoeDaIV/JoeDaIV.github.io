@@ -1,8 +1,8 @@
 /* global $, sessionStorage */
 
 $(document).ready(runProgram); // wait for the HTML / CSS elements of the page to fully load, then execute runProgram()
-  
-function runProgram(){
+
+function runProgram() {
   ////////////////////////////////////////////////////////////////////////////////
   //////////////////////////// SETUP /////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
@@ -24,13 +24,18 @@ function runProgram(){
   }
 
   var xPosition = 0;
+  var xPosition2 = 0;
   var yPosition = 0;
+  var yPosition2 = 0;
   var xSpeed = 0;
+  var xSpeed2 = 0
   var ySpeed = 0;
+  var ySpeed2 = 0;
   var board = jQuery("#board");
   var boardWidth = board.width();
   var boardHeight = board.height();
-     
+  var stop = boardWidth - walker1.width;
+
   // Game Item Objects
 
 
@@ -44,78 +49,58 @@ function runProgram(){
   ////////////////////////////////////////////////////////////////////////////////
 
   // core logic 
-  function handleKeyDown(event){
-    if(event.which === keyRight.UP){
-      ySpeed = -5;
-      // console.log("Up arrow pressed");
-    }
-    else if(event.which === keyRight.DOWN) {
-      ySpeed = 5;
-      // console.log("Down arrow pressed");
-    }
-    else if(event.which === keyRight.LEFT) {
-      xSpeed = -5;
-      // console.log("Left arrow pressed");
-    }
-    else if(event.which === keyRight.RIGHT) {
-      xSpeed = 5;
-      //console.log("Right arrow pressed");
-    }
-    else if(event.which === keyLeft.A){
-      xSpeed = -5;
-    }
-    else if(event.which === keyLeft.D){
-      xSpeed = 5;
-    }
-    else if(event.which === keyLeft.W){
+  function handleKeyDown(event) {
+    if (event.which === keyRight.UP) {
       ySpeed = -5;
     }
-    else if(event.which === keyLeft.S){
+    else if (event.which === keyRight.DOWN) {
       ySpeed = 5;
+    }
+    else if (event.which === keyRight.LEFT) {
+      xSpeed = -5;
+    }
+    else if (event.which === keyRight.RIGHT) {
+      xSpeed = 5;
+    }
+    else if (event.which === keyLeft.A) {
+      xSpeed2 = 5;
+    }
+    else if (event.which === keyLeft.D) {
+      xSpeed2 = -5;
+    }
+    else if (event.which === keyLeft.W) {
+      ySpeed2 = -5;
+    }
+    else if (event.which === keyLeft.S) {
+      ySpeed2 = 5;
     }
 
   }
   function handleKeyUp(event) {
-    if(keyRight.UP === event.which) {
+    if (keyRight.UP === event.which) {
       ySpeed = 0;
-    } else{
-      ySpeed = -5;
-    }
-    if(keyRight.DOWN === event.which) {
+    } 
+    if (keyRight.DOWN === event.which) {
       ySpeed = 0;
-    } else{
-      ySpeed = 5;
-    }
-    if(keyRight.LEFT === event.which){
+    } 
+    if (keyRight.LEFT === event.which) {
       xSpeed = 0;
-    } else {
-      xSpeed = -5;
-    }
-    if(keyRight.RIGHT === event.which){
+    } 
+    if (keyRight.RIGHT === event.which) {
       xSpeed = 0;
-    } else {
-      xSpeed = 5;
+    } 
+    if (keyLeft.W === event.which) {
+      ySpeed2 = 0;
+    } 
+    if (keyLeft.S === event.which) {
+      ySpeed2 = 0;
     }
-    if(keyLeft.W === event.which){
-      ySpeed = 0;
-    } else{
-      ySpeed = -5;
-    }
-    if(keyLeft.S === event.which) {
-      ySpeed = 0;
-    } else{
-      ySpeed = 5;
-    }
-    if(keyLeft.A === event.which){
-      xSpeed = 0;
-    } else {
-      xSpeed = -5;
-    }
-    if(keyLeft.D === event.which){
-      xSpeed = 0;
-    } else{
-      xSpeed = 5;
-    }
+    if (keyLeft.A === event.which) {
+      xSpeed2 = 0;
+    } 
+    if (keyLeft.D === event.which) {
+      xSpeed2 = 0;
+    } 
   }
 
   /* 
@@ -125,9 +110,10 @@ function runProgram(){
   function newFrame() {
     redrawGameItem();
     repositionGameItem();
+    setBoundary();
 
   }
-  
+
   /* 
   Called in response to events.
   */
@@ -139,7 +125,7 @@ function runProgram(){
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
 
-  
+
   function endGame() {
     // stop the interval timer
     clearInterval(interval);
@@ -150,25 +136,68 @@ function runProgram(){
   function repositionGameItem() {
     xPosition += xSpeed;
     yPosition += ySpeed;
-    if(xPosition >= boardWidth) {
-      xSpeed *= -1;
+    xPosition2 += xSpeed2;
+    yPosition2 += ySpeed2;
+    if (xPosition >= boardWidth) {
+      xSpeed = 0;
     }
-    if(yPosition >= boardHeight) {
-      ySpeed *= -1;
+    if (yPosition >= boardHeight) {
+      ySpeed = 0;
     }
-    if(yPosition <= 1) {
-      ySpeed *= -1;
+    if (xPosition <= 0) {
+      xSpeed = 0;
     }
-    if(xPosition <= 1) {
-      xSpeed *= -1;
+    if (yPosition <= 0) {
+      ySpeed = 0;
+    }
+    if (yPosition2 >= boardHeight) {
+      ySpeed2 = 0;
+    }
+    if (xPosition2 >= boardWidth) {
+      xSpeed2 = 0;
+    }
+    if (yPosition2 <= 0) {
+      ySpeed2 = 0;
+    }
+    if (xPosition2 <= 0) {
+      xSpeed2 = 0;
     }
 
   }
-  
+  function setBoundary() {
+    if(xPosition > boardWidth){
+      xPosition = boardWidth;
+    }
+    if(yPosition > boardHeight){
+      yPosition = boardHeight;
+    }
+    if(xPosition2 > boardWidth){
+      xPosition2 = boardWidth;
+    }
+    if(yPosition2 > boardHeight){
+      yPosition2 = boardHeight;
+    }
+    if(xPosition < 0){
+      xPosition = 0;
+    }
+    if(yPosition < 0){
+      yPosition = 0;
+    }
+    if(xPosition2 < 0){
+      xPosition2 = 0;
+    }
+    if(yPosition2 < 0){
+      yPosition2 = 0;
+    }
+
+  }
+
   function redrawGameItem() {
     $("#walker1").css("left", xPosition);
     $("#walker1").css("top", yPosition);
-    $("#tag2").css("right", xPosition);
-    $("#tag2").css("top", yPosition);
+    $("#tag2").css("right", xPosition2);
+    $("#tag2").css("top", yPosition2);
   }
 }
+
+
