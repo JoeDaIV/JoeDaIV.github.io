@@ -34,7 +34,9 @@ function runProgram() {
   var board = jQuery("#board");
   var boardWidth = board.width();
   var boardHeight = board.height();
-  var stop = boardWidth - walker1.width;
+  console.log(walker1.css);
+  var stopX = boardWidth - $("#walker1").width();
+  var stopY = boardHeight - $("#walker1").height();
 
   // Game Item Objects
 
@@ -165,17 +167,17 @@ function runProgram() {
 
   }
   function setBoundary() {
-    if(xPosition > boardWidth){
-      xPosition = boardWidth;
+    if(xPosition > stopX){
+      xPosition = stopX;
     }
-    if(yPosition > boardHeight){
-      yPosition = boardHeight;
+    if(yPosition > stopY){
+      yPosition = stopY;
     }
-    if(xPosition2 > boardWidth){
-      xPosition2 = boardWidth;
+    if(xPosition2 > stopX){
+      xPosition2 = stopX;
     }
-    if(yPosition2 > boardHeight){
-      yPosition2 = boardHeight;
+    if(yPosition2 > stopY){
+      yPosition2 = stopY;
     }
     if(xPosition < 0){
       xPosition = 0;
