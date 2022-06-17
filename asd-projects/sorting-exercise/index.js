@@ -22,7 +22,7 @@ async function bubbleSort(array) {
             console.log({i, j});
             if (array[j].value < array[j - 1].value) {
                 swap(array, j, j - 1);
-                updateCounter(bubbleSort);
+                updateCounter(bubbleCounter);
                 await sleep();
             }
         }
@@ -44,7 +44,24 @@ async function quickSort(array, left, right){
 }
 
 // TODOs 4 & 5: Implement partition
-function partition(){}
+async function partition(array, left, right){
+    var pivot = array[Math.floor((right + left)/2)].value;
+    while(left < right){
+        while(array[left].value < pivot){
+            left++;
+        }
+        while(array[right].value > pivot){
+            right--;
+        }
+        if(left < right){
+            swap(array, left, right);
+            updateCounter(quickCounter);
+            await sleep();
+        }
+    }
+    return left + 1;
+
+}
 
 // TODO 1: Implement swap
 async function swap(array, i, j) {
