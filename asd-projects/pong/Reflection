@@ -1,0 +1,11 @@
+opens to a screen with a countdown timer
+then in 5 secs the game begins
+the ball launches in a random direction
+either player 1 or 2 will move their paddle to reflect the ball: to do this the keys to press are w and s for player one and up and down arrows for player two
+if the ball hits a wall then it bounces away
+if the ball hits the paddle then it bounces away
+if the ball hits the end wall then it disappears and gives the opposite side a point
+the game then sarts over with a 3 sec countdown instead
+to end the game one player has to hit 7 points
+the only thing thats animated is the ball, paddles, timer, and points
+the thing that is static is the directions
