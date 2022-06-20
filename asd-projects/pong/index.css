@@ -11,11 +11,57 @@ body {
   position: relative;
 }
 
-#gameItem {
-  background-color: teal;
-  width: 50px;
-  height: 50px;
+#leftPaddle {
+  /* appearance */
+  background-color: white;
+  width: 20px;
+  height: 80px;
+  border-radius: 20px;
+  
+  /* positioning */
   position: absolute;
-/*   left: 100px; */  /* Uncomment if you want to set a "starting" position */
-/*   top: 100px;  */  /* Uncomment if you want to set a "starting" position */
+  top: 200px;
+  left: 0px;
 }
+
+#rightPaddle {
+  /* appearance */
+  background-color: white;
+  width: 20px;
+  height: 80px;
+  border-radius: 20px;
+  
+  /* positioning */
+  position: absolute;
+  top: 200px;
+  right: 0px;
+}
+
+#ball {
+  /* appearance */
+  background-color: rgb(245, 27, 27);
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  
+  /* positioning */
+  position: absolute;
+  top: 220px;
+  left: 220px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

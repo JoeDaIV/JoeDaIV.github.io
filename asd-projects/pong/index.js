@@ -1,8 +1,8 @@
 /* global $, sessionStorage */
 
 $(document).ready(runProgram); // wait for the HTML / CSS elements of the page to fully load, then execute runProgram()
-  
-function runProgram(){
+
+function runProgram() {
   ////////////////////////////////////////////////////////////////////////////////
   //////////////////////////// SETUP /////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
@@ -10,8 +10,31 @@ function runProgram(){
   // Constant Variables
   const FRAME_RATE = 60;
   const FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
-  
+
   // Game Item Objects
+  var x = parseFloat($("#leftPaddle").css("left"));
+  var y = parseFloat($("#leftPaddle").css("top"));
+  var width = $("#leftPaddle").width();
+  var height = $("#leftPaddle").height();
+  var speedY = 0;
+
+  var x = parseFloat($("#rightPaddle").css("left"));
+  var y = parseFloat($("#rightPaddle").css("top"));
+  var width = $("#rightPaddle").width();
+  var height = $("#rightPaddle").height(); 
+  var speedY = 0;
+
+  var x = parseFloat($("#ball").css("left"));
+  var y = parseFloat($("#ball").css("top"));
+  var width = $("#ball").width();
+  var height = $("#ball").height();
+  var speedY = 0;
+  var speedX = 0;
+
+  function gameItems(x, y, width, height){
+
+
+  }
 
 
   // one-time setup
@@ -27,10 +50,10 @@ function runProgram(){
   by calling this function and executing the code inside.
   */
   function newFrame() {
-    
+
 
   }
-  
+
   /* 
   Called in response to events.
   */
@@ -42,7 +65,7 @@ function runProgram(){
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
 
-  
+
   function endGame() {
     // stop the interval timer
     clearInterval(interval);
@@ -50,5 +73,5 @@ function runProgram(){
     // turn off event handlers
     $(document).off();
   }
-  
+
 }
