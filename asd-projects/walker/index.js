@@ -51,7 +51,7 @@ function runProgram() {
   ////////////////////////////////////////////////////////////////////////////////
 
   // core logic 
-  function handleKeyDown(event) {
+  function handleKeyDown(event) { // tells the gameItems to start moving
     if (event.which === keyRight.UP) {
       ySpeed = -5;
     }
@@ -78,7 +78,7 @@ function runProgram() {
     }
 
   }
-  function handleKeyUp(event) {
+  function handleKeyUp(event) { // tells the gameItems when to stop moving
     if (keyRight.UP === event.which) {
       ySpeed = 0;
     } 
@@ -135,7 +135,7 @@ function runProgram() {
     // turn off event handlers
     $(document).off();
   }
-  function repositionGameItem() {
+  function repositionGameItem() { // keeps the gameItems moving and tells them when and if they need to stop
     xPosition += xSpeed;
     yPosition += ySpeed;
     xPosition2 += xSpeed2;
@@ -166,7 +166,7 @@ function runProgram() {
     }
 
   }
-  function setBoundary() {
+  function setBoundary() { // creates a boundary to keep the gameItems inside the box 
     if(xPosition > stopX){
       xPosition = stopX;
     }
@@ -194,7 +194,7 @@ function runProgram() {
 
   }
 
-  function redrawGameItem() {
+  function redrawGameItem() { // gives the gameItems a respawn position
     $("#walker1").css("left", xPosition);
     $("#walker1").css("top", yPosition);
     $("#tag2").css("right", xPosition2);
