@@ -12,7 +12,7 @@ function runProgram() {
   const FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
 
   // Game Item Objects
-
+// debugger;
   function GameObject($id) {
     var obj = {};
     obj.id = $id;
@@ -26,11 +26,10 @@ function runProgram() {
     return obj;
   }
 
-  var ball = GameObject("#ball", "220px", "220px", "20px", "20px", "red", 10, 10);
-  var leftPaddle = GameObject("#leftPaddle", "0px", "220px", "20px", "80px", "mid-night blue", 0);
-  var rightPaddle = GameObject("#rightPaddle", "440px", "220px", "20px", "80px", "scarlet", 0);
-
-
+  var ball = GameObject("#ball");
+  var leftPaddle = GameObject("#leftPaddle");
+  var rightPaddle = GameObject("#rightPaddle");
+ console.log(ball, leftPaddle,  rightPaddle);
   var keyRight = {
     UP: 38,
     DOWN: 40
@@ -46,43 +45,58 @@ function runProgram() {
   $(document).on('eventType', handleEvent);                           // change 'eventType' to the type of event you want to handle
   $(document).on('keydown', handleKeyDown);
   $(document).on("keyup", handleKeyUp);
+  startBall();
 
   ////////////////////////////////////////////////////////////////////////////////
   ///////////////////////// CORE LOGIC ///////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////// 
 
   function handleKeyDown(event) {
-    if(event.which === keyLeft.W){
-      leftPaddle.speedY = leftPaddle.y + -12;
-    console.log(52);
+    if (event.which === keyLeft.W) {
+      leftPaddle.speedY += -12;
     }
-    if(event.which === keyLeft.S){
+    else if (event.which === keyLeft.S) {
       leftPaddle.speedY += 12;
     }
-    if(event.which === keyRight.UP){
+    else if (event.which === keyRight.UP) {
       rightPaddle.speedY += -12;
     }
-    if(event.which === keyRight.DOWN){
+    else if (event.which === keyRight.DOWN) {
       rightPaddle.speedY += 12;
-      console.log(25);
     }
   }
-  
-  function handleKeyUp(){}
 
-  /* 
+  function handleKeyUp(event) {
+    if (event.which === keyLeft.W) {
+      leftPaddle.speedY = 0;
+    }
+    if (event.which === keyLeft.S) {
+      leftPaddle.speedY = 0;
+    }
+    if (event.which === keyRight.UP) {
+      rightPaddle.speedY = 0;
+    }
+    if (event.which === keyRight.DOWN) {
+      rightPaddle.speedY = 0;
+    }
+   }
+
+ 
+ /* 
   On each "tick" of the timer, a new frame is dynamically drawn using JavaScript
   by calling this function and executing the code inside.
   */
   function newFrame() {
-    GameObject();
+    moveObject(leftPaddle);
+    moveObject(ball);
+    moveObject(rightPaddle);
+    // repositionGameItem();
+    reDraw();
 
-
-  }
-
-  /* 
-  Called in response to events.
-  */
+  }   
+   /* 
+    Called in response to events.
+    */
   function handleEvent(event) {
 
   }
@@ -90,6 +104,35 @@ function runProgram() {
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
+
+  function repositionGameItem() {
+    leftPaddle.y += leftPaddle.speedY;
+    rightPaddle.y += rightPaddle.speedY;
+  }
+
+  function startBall(){
+    ball.y = ball.y;
+    ball.x = ball.x;
+    ball.speedX = randomNum = (Math.random() * 3 + 2) * (Math.random() > 0.5 ? -1 : 1);
+    ball.speedY = randomNum = (Math.random() * 3 + 2) * (Math.random() > 0.5 ? -1 : 1);
+  }
+
+  function moveObject(obj){
+    obj.x += obj.speedX;
+    obj.y += obj.speedY;
+    $(obj.id).css("left", obj.x);
+    $(obj.id).css("top", obj.y)
+  }
+
+  function reDraw(){
+  
+    $(rightPaddle.id).css("top", rightPaddle.y);
+    $("#rightPaddle").css("left", rightPaddle.x);
+    $(leftPaddle.id).css("top", leftPaddle.y);
+    $(leftPaddle.id).css("left", leftPaddle.x);
+    $("#ball").css("top", ball.y);
+    $("#ball").css("left", ball.x);
+  }
 
 
   function endGame() {
