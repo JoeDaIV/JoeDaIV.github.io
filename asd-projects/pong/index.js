@@ -10,6 +10,8 @@ function runProgram() {
   // Constant Variables
   const FRAME_RATE = 60;
   const FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
+  const BOARD_WIDTH = $("#board").width();
+  const BOARD_HEIGHT = $("#board").height();
 
   // Game Item Objects
 // debugger;
@@ -30,6 +32,8 @@ function runProgram() {
   var leftPaddle = GameObject("#leftPaddle");
   var rightPaddle = GameObject("#rightPaddle");
  console.log(ball, leftPaddle,  rightPaddle);
+  var stopX = BOARD_WIDTH - $("#obj").width();
+  var stopY = BOARD_HEIGHT - $("#obj").height();
   var keyRight = {
     UP: 38,
     DOWN: 40
@@ -92,6 +96,11 @@ function runProgram() {
     moveObject(rightPaddle);
     // repositionGameItem();
     reDraw();
+    wallColision(leftPaddle);
+    wallColision(ball);
+    wallColision(rightPaddle);
+    setPadBoundary(leftPaddle);
+    setPadBoundary(rightPaddle);
 
   }   
    /* 
@@ -122,6 +131,36 @@ function runProgram() {
     obj.y += obj.speedY;
     $(obj.id).css("left", obj.x);
     $(obj.id).css("top", obj.y)
+  }
+
+  function wallColision(obj){
+    if(obj.y >= BOARD_HEIGHT){
+      obj.speedY = 0;
+    }
+    if(obj.x >= BOARD_WIDTH){
+      obj.speedX = 0;
+    }
+    if(obj.y <= 0){
+      obj.speedY = 0;
+    }
+    if(obj.x <= 0){
+      obj.speedX = 0;
+    }
+  }
+
+  function setPadBoundary(obj){
+    if(obj.y > stopY){
+      obj.y = stopY;
+    }
+    if(obj.x > stopX){
+      obj.x = stopX;
+    }
+    if(obj.y < 0){
+      obj.y = 0;
+    }
+    if(obj.x < 0){
+      obj.x = 0;
+    }
   }
 
   function reDraw(){
