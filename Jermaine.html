@@ -39,3 +39,18 @@
 </body>
 
 </html>
+function setBoundary(obj){
+    
+    if(obj.y > stopY){
+      obj.y = stopY;
+    }
+    if(obj.x > stopX){
+      obj.x = stopX;
+    }
+    if(obj.y < 0){
+      obj.y = 0;
+    }
+    if(obj.x < 0){
+      obj.x = 0;
+    }
+  }

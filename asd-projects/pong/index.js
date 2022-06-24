@@ -14,7 +14,7 @@ function runProgram() {
   const BOARD_HEIGHT = $("#board").height();
 
   // Game Item Objects
-// debugger;
+  // debugger;
   function GameObject($id) {
     var obj = {};
     obj.id = $id;
@@ -31,7 +31,7 @@ function runProgram() {
   var ball = GameObject("#ball");
   var leftPaddle = GameObject("#leftPaddle");
   var rightPaddle = GameObject("#rightPaddle");
- console.log(ball, leftPaddle,  rightPaddle);
+  console.log(ball, leftPaddle, rightPaddle);
   var stopX = BOARD_WIDTH - $("#obj").width();
   var stopY = BOARD_HEIGHT - $("#obj").height();
   var keyRight = {
@@ -83,13 +83,13 @@ function runProgram() {
     if (event.which === keyRight.DOWN) {
       rightPaddle.speedY = 0;
     }
-   }
+  }
 
- 
- /* 
-  On each "tick" of the timer, a new frame is dynamically drawn using JavaScript
-  by calling this function and executing the code inside.
-  */
+
+  /* 
+   On each "tick" of the timer, a new frame is dynamically drawn using JavaScript
+   by calling this function and executing the code inside.
+   */
   function newFrame() {
     moveObject(leftPaddle);
     moveObject(ball);
@@ -99,13 +99,15 @@ function runProgram() {
     wallColision(leftPaddle);
     wallColision(ball);
     wallColision(rightPaddle);
-    setPadBoundary(leftPaddle);
-    setPadBoundary(rightPaddle);
-
-  }   
-   /* 
-    Called in response to events.
-    */
+    setBoundary(leftPaddle);
+    setBoundary(rightPaddle);
+    collision(leftPaddle);
+    collision(rightPaddle);
+    collision(ball);
+  }
+  /* 
+   Called in response to events.
+   */
   function handleEvent(event) {
 
   }
@@ -119,52 +121,59 @@ function runProgram() {
     rightPaddle.y += rightPaddle.speedY;
   }
 
-  function startBall(){
+  function startBall() {
     ball.y = ball.y;
     ball.x = ball.x;
     ball.speedX = randomNum = (Math.random() * 3 + 2) * (Math.random() > 0.5 ? -1 : 1);
     ball.speedY = randomNum = (Math.random() * 3 + 2) * (Math.random() > 0.5 ? -1 : 1);
   }
 
-  function moveObject(obj){
+  function moveObject(obj) {
     obj.x += obj.speedX;
     obj.y += obj.speedY;
     $(obj.id).css("left", obj.x);
-    $(obj.id).css("top", obj.y)
+    $(obj.id).css("top", obj.y);
   }
 
-  function wallColision(obj){
-    if(obj.y >= BOARD_HEIGHT){
+  function wallColision(obj) {
+    if (obj.y >= BOARD_HEIGHT) {
       obj.speedY = 0;
     }
-    if(obj.x >= BOARD_WIDTH){
+    if (obj.x >= BOARD_WIDTH) {
       obj.speedX = 0;
     }
-    if(obj.y <= 0){
+    if (obj.y <= 0) {
       obj.speedY = 0;
     }
-    if(obj.x <= 0){
+    if (obj.x <= 0) {
       obj.speedX = 0;
     }
   }
+  function collision(obj) {
+    obj.right = obj.x + obj.width;
+    obj.left = obj.x;
+    obj.top = obj.y;
+    obj.bottom = obj.y + obj.height;
 
-  function setPadBoundary(obj){
-    if(obj.y > stopY){
-      obj.y = stopY;
-    }
-    if(obj.x > stopX){
-      obj.x = stopX;
-    }
-    if(obj.y < 0){
-      obj.y = 0;
-    }
-    if(obj.x < 0){
-      obj.x = 0;
+    if (obj.right > obj.left && obj.left < obj.right &&
+      obj.top < obj.bottom && obj.bottom > obj.top) {
+      return true;
+    } else {
+      false;
     }
   }
+  function setBoundary(obj) {
+    var inBound = BOARD_WIDTH;
+    var endBound = BOARD_HEIGHT;
+    var result = obj.x > inBound ? inBound : obj.x 
+    var result2 = obj.y > endBound ? endBound : obj.y 
+    var result3 = obj.x < 0 ? 0 : obj.x 
+    var result4 = obj.y < 0 ? 0 : obj.y;
+    return result4;
+  }
 
-  function reDraw(){
-  
+  function reDraw() {
+
     $(rightPaddle.id).css("top", rightPaddle.y);
     $("#rightPaddle").css("left", rightPaddle.x);
     $(leftPaddle.id).css("top", leftPaddle.y);
