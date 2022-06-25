@@ -4,8 +4,8 @@ body {
 }
 
 #board {
-  width: 440px;
-  height: 440px;
+  width: 800px;
+  height: 600px;
   border: 1px solid white;
   background-color: black;
   position: relative;
@@ -50,7 +50,12 @@ body {
   left: 220px;
 }
 
-
+#score {
+  background-attachment: absolute;
+  background-color: aliceblue;
+  font: 1em sans-serif;
+  font-size: medium;
+}
 
 
 

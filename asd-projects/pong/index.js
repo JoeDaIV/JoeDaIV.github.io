@@ -34,6 +34,7 @@ function runProgram() {
   console.log(ball, leftPaddle, rightPaddle);
   var stopX = BOARD_WIDTH - $("#obj").width();
   var stopY = BOARD_HEIGHT - $("#obj").height();
+  var updateScore = score++;
   var keyRight = {
     UP: 38,
     DOWN: 40
@@ -101,6 +102,7 @@ function runProgram() {
     wallColision(rightPaddle);
     setBoundary(leftPaddle);
     setBoundary(rightPaddle);
+    setBoundary(ball);
     collision(leftPaddle);
     collision(rightPaddle);
     collision(ball);
@@ -148,6 +150,7 @@ function runProgram() {
     if (obj.x <= 0) {
       obj.speedX = 0;
     }
+    
   }
   function collision(obj) {
     obj.right = obj.x + obj.width;
@@ -157,19 +160,23 @@ function runProgram() {
 
     if (obj.right > obj.left && obj.left < obj.right &&
       obj.top < obj.bottom && obj.bottom > obj.top) {
-      return true;
     } else {
       false;
     }
   }
   function setBoundary(obj) {
-    var inBound = BOARD_WIDTH;
-    var endBound = BOARD_HEIGHT;
-    var result = obj.x > inBound ? inBound : obj.x 
-    var result2 = obj.y > endBound ? endBound : obj.y 
-    var result3 = obj.x < 0 ? 0 : obj.x 
-    var result4 = obj.y < 0 ? 0 : obj.y;
-    return result4;
+    if(obj.y > stopY){
+      obj.y = stopY;
+    }
+    if(obj.x > stopX){
+      obj.x = stopX;
+    }
+    if(obj.y < 0){
+      obj.y = 0;
+    }
+    if(obj.x < 0){
+      obj.x = 0;
+    }
   }
 
   function reDraw() {

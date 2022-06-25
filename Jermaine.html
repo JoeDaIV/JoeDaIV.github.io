@@ -54,3 +54,8 @@ function setBoundary(obj){
       obj.x = 0;
     }
   }
+  return obj.x > stopX ? stopX 
+  : obj.x < 0 ? 0
+  : obj.y < 0 ? 0
+  : obj.y > stopY ? stopY
+  : obj;
