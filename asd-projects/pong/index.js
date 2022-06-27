@@ -34,7 +34,7 @@ function runProgram() {
   console.log(ball, leftPaddle, rightPaddle);
   var stopX = BOARD_WIDTH - $("#obj").width();
   var stopY = BOARD_HEIGHT - $("#obj").height();
-  var updateScore = score++;
+  var updateScore = 1;
   var keyRight = {
     UP: 38,
     DOWN: 40
@@ -106,6 +106,7 @@ function runProgram() {
     collision(leftPaddle);
     collision(rightPaddle);
     collision(ball);
+    bScore(ball);
   }
   /* 
    Called in response to events.
@@ -150,8 +151,34 @@ function runProgram() {
     if (obj.x <= 0) {
       obj.speedX = 0;
     }
-    
+    if (ball.y >= BOARD_HEIGHT) {
+      ball.y -= ball.speedY;
+      ball.speedY *= -1;
+    }
+    if (ball.y <= 0) {
+      ball.y -= ball.speedY;
+      ball.speedY *= -1;
+    }
+    if (ball.x <= 0) {
+      return true;
+    } else {
+      false;
+    }
+    if (ball.x >= BOARD_WIDTH) {
+      return true;
+    } else {
+      false;
+    }
   }
+
+  function bScore(ball) {
+    if (wallColision(ball)) {
+      $("#score").text(updateScore);
+      startBall();
+    }
+  }
+
+
   function collision(obj) {
     obj.right = obj.x + obj.width;
     obj.left = obj.x;
@@ -165,16 +192,16 @@ function runProgram() {
     }
   }
   function setBoundary(obj) {
-    if(obj.y > stopY){
+    if (obj.y > stopY) {
       obj.y = stopY;
     }
-    if(obj.x > stopX){
+    if (obj.x > stopX) {
       obj.x = stopX;
     }
-    if(obj.y < 0){
+    if (obj.y < 0) {
       obj.y = 0;
     }
-    if(obj.x < 0){
+    if (obj.x < 0) {
       obj.x = 0;
     }
   }
@@ -197,5 +224,6 @@ function runProgram() {
     // turn off event handlers
     $(document).off();
   }
+
 
 }
