@@ -28,13 +28,15 @@ function runProgram() {
     return obj;
   }
 
+
   var ball = GameObject("#ball");
   var leftPaddle = GameObject("#leftPaddle");
   var rightPaddle = GameObject("#rightPaddle");
   console.log(ball, leftPaddle, rightPaddle);
   var stopX = BOARD_WIDTH - $("#obj").width();
   var stopY = BOARD_HEIGHT - $("#obj").height();
-  var updateScore = 1;
+  var update1Score = 0;
+  var update2Score = 0;
   var keyRight = {
     UP: 38,
     DOWN: 40
@@ -103,9 +105,7 @@ function runProgram() {
     setBoundary(leftPaddle);
     setBoundary(rightPaddle);
     setBoundary(ball);
-    collision(leftPaddle);
-    collision(rightPaddle);
-    collision(ball);
+    collision();
     bScore(ball);
   }
   /* 
@@ -159,37 +159,50 @@ function runProgram() {
       ball.y -= ball.speedY;
       ball.speedY *= -1;
     }
-    if (ball.x <= 0) {
-      return true;
-    } else {
-      false;
-    }
-    if (ball.x >= BOARD_WIDTH) {
-      return true;
-    } else {
-      false;
-    }
   }
 
-  function bScore(ball) {
-    if (wallColision(ball)) {
-      $("#score").text(updateScore);
+  function bScore(obj) {
+    if (obj.x >= BOARD_WIDTH) {
+      update1Score = update1Score + 1;
+      $("#score1").text(update1Score);
       startBall();
+      // console.log(5);
+    }
+    if (obj.x <= 0) {
+      update2Score = update2Score + 1;
+      $("#score2").text(update2Score);
+      startBall();
+      // console.log(7);
+
     }
   }
 
 
-  function collision(obj) {
-    obj.right = obj.x + obj.width;
-    obj.left = obj.x;
-    obj.top = obj.y;
-    obj.bottom = obj.y + obj.height;
+  function collision(obj1, obj2) {
+    obj1.right = obj1.x + obj1.width;
+    obj1.left = obj1.x;
+    obj1.top = obj1.y;
+    obj1.bottom = obj1.y + obj1.height;
+    obj2.right = obj2.x + obj2.width;
+    obj2.left = obj2.x;
+    obj2.top = obj2.y;
+    obj2.bottom = obj2.y + obj2.height;
 
-    if (obj.right > obj.left && obj.left < obj.right &&
-      obj.top < obj.bottom && obj.bottom > obj.top) {
+    if (obj1.right > obj2.left && obj1.left < obj2.right &&
+      obj1.top < obj2.bottom && obj1.bottom > obj2.top) {
     } else {
       false;
     }
+    if (collision(ball, leftPaddle)) {
+      ball.y *= -1;
+      ball.x *= -1;
+    }
+    if (collision(ball, rightPaddle)) {
+      ball.y *= -1;
+      ball.x *= -1;
+    }
+
+
   }
   function setBoundary(obj) {
     if (obj.y > stopY) {

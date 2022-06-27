@@ -9,6 +9,10 @@
   <!-- Load JavaScript files -->
   <script src="jquery.min.js"></script>
   <script src="index.js"></script>
+  <script>
+    $("<div id= 'score1'>").appendTo("h2:first");
+    $("<div id= 'score2'>").appendTo("h2:last");
+  </script>
 </head>
 
 <body>
@@ -19,8 +23,8 @@
     <div id="player1"> </div>
     <div id="player2"> </div>
   </div>
-  <h2>player1 score:<div id="score"></div>  </h2>
-  <h2>Player2 score:<div id="score"></div> </h2>
+  <h2> Player1 score:</h2>
+  <h2> Player2 score:</h2>
 
 </body>
 
