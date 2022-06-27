@@ -35,6 +35,11 @@ function runProgram() {
   console.log(ball, leftPaddle, rightPaddle);
   var stopX = BOARD_WIDTH - $("#obj").width();
   var stopY = BOARD_HEIGHT - $("#obj").height();
+  var midPoint = {
+    down: BOARD_HEIGHT / 2,
+    across: BOARD_WIDTH / 2
+  }
+  var winNum = 10;
   var update1Score = 0;
   var update2Score = 0;
   var keyRight = {
@@ -105,8 +110,8 @@ function runProgram() {
     setBoundary(leftPaddle);
     setBoundary(rightPaddle);
     setBoundary(ball);
-    collision();
-    bScore(ball);
+    collision(ball, leftPaddle);
+    collision(ball, rightPaddle);
   }
   /* 
    Called in response to events.
@@ -125,10 +130,11 @@ function runProgram() {
   }
 
   function startBall() {
-    ball.y = ball.y;
-    ball.x = ball.x;
-    ball.speedX = randomNum = (Math.random() * 3 + 2) * (Math.random() > 0.5 ? -1 : 1);
-    ball.speedY = randomNum = (Math.random() * 3 + 2) * (Math.random() > 0.5 ? -1 : 1);
+    ball.x = midPoint.across;
+    ball.y = midPoint.down;
+
+    ball.speedX = randomNum = (Math.random() * 5 + 2) * (Math.random() > 0.5 ? -1 : 1);
+    ball.speedY = randomNum = (Math.random() * 5 + 2) * (Math.random() > 0.5 ? -1 : 1);
   }
 
   function moveObject(obj) {
@@ -139,46 +145,54 @@ function runProgram() {
   }
 
   function wallColision(obj) {
-    if (obj.y >= BOARD_HEIGHT) {
+    if (obj.y >= BOARD_HEIGHT || obj.y <= 0) {
       obj.speedY = 0;
     }
-    if (obj.x >= BOARD_WIDTH) {
+    if (obj.x >= BOARD_WIDTH || obj.x <= 0) {
       obj.speedX = 0;
+      bScore(ball);
     }
-    if (obj.y <= 0) {
-      obj.speedY = 0;
-    }
-    if (obj.x <= 0) {
-      obj.speedX = 0;
-    }
-    if (ball.y >= BOARD_HEIGHT) {
+    if (ball.y >= BOARD_HEIGHT || ball.y <= 0) {
       ball.y -= ball.speedY;
       ball.speedY *= -1;
     }
-    if (ball.y <= 0) {
-      ball.y -= ball.speedY;
-      ball.speedY *= -1;
-    }
+
   }
 
-  function bScore(obj) {
+  function bScore(obj) { // 
     if (obj.x >= BOARD_WIDTH) {
       update1Score = update1Score + 1;
       $("#score1").text(update1Score);
       startBall();
-      // console.log(5);
+      //  console.log(5);
     }
     if (obj.x <= 0) {
       update2Score = update2Score + 1;
       $("#score2").text(update2Score);
       startBall();
-      // console.log(7);
-
+      //  console.log(7);
     }
+    if (update1Score === winNum) {
+      $("#winner1").css({
+        top: 0,
+        left: 200
+      }).text("Player 1 wins");
+      endGame();
+      console.log($("#winner1"));
+    }
+    if (update2Score === winNum) {
+      $("#winner2").css({
+        top: 0,
+        left: 200
+      }).text("Player 2 wins");
+      endGame();
+      console.log($("#winner2"));
+    }
+
   }
 
 
-  function collision(obj1, obj2) {
+  function collision(obj1, obj2) { // bounces the ball away when it comes into contact with the ball
     obj1.right = obj1.x + obj1.width;
     obj1.left = obj1.x;
     obj1.top = obj1.y;
@@ -190,36 +204,59 @@ function runProgram() {
 
     if (obj1.right > obj2.left && obj1.left < obj2.right &&
       obj1.top < obj2.bottom && obj1.bottom > obj2.top) {
-    } else {
-      false;
+
+      ball.speedX *= -1;
     }
-    if (collision(ball, leftPaddle)) {
-      ball.y *= -1;
-      ball.x *= -1;
-    }
-    if (collision(ball, rightPaddle)) {
-      ball.y *= -1;
-      ball.x *= -1;
-    }
+
 
 
   }
-  function setBoundary(obj) {
-    if (obj.y > stopY) {
-      obj.y = stopY;
+  function setBoundary(obj) { // keeps the objects in bounds
+    var stopBX = BOARD_WIDTH - $("#ball").width();
+    var stopBY = BOARD_HEIGHT - $("ball").height();
+    var stopLX = BOARD_WIDTH - $("#leftPaddle").width();
+    var stopLY = BOARD_HEIGHT - $("#leftPaddle").height();
+    var stopRX = BOARD_WIDTH - $("#rightPaddle").width();
+    var stopRY = BOARD_HEIGHT - $("#rightPaddle").height();
+    if (ball.y >= stopBY) {
+      ball.y = stopBY;
     }
-    if (obj.x > stopX) {
-      obj.x = stopX;
+    if (leftPaddle.y >= stopLY) {
+      leftPaddle.y = stopLY;
     }
-    if (obj.y < 0) {
-      obj.y = 0;
+    if (rightPaddle.y >= stopRY) {
+      rightPaddle.y = stopRY;
     }
-    if (obj.x < 0) {
-      obj.x = 0;
+    if (rightPaddle.x >= stopRX) {
+      rightPaddle.x = stopRX;
+    }
+    if (leftPaddle.x >= stopLX) {
+      leftPaddle.x = stopLX;
+    }
+    if (ball.x >= stopBX) {
+      ball.x = stopBX;
+    }
+    if (ball.y <= 0) {
+      ball.y = 0;
+    }
+    if (rightPaddle.y <= 0) {
+      rightPaddle.y = 0;
+    }
+    if (leftPaddle.y <= 0) {
+      leftPaddle.y = 0;
+    }
+    if (ball.x <= 0) {
+      ball.x = 0;
+    }
+    if (leftPaddle.x <= 0) {
+      leftPaddle.x = 0;
+    }
+    if (rightPaddle.x <= 0) {
+      rightPaddle.x = 0;
     }
   }
 
-  function reDraw() {
+  function reDraw() { // makes a respawn position
 
     $(rightPaddle.id).css("top", rightPaddle.y);
     $("#rightPaddle").css("left", rightPaddle.x);

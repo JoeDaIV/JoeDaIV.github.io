@@ -50,13 +50,36 @@ body {
 }
 
 #score1 {
-  background-color: aliceblue;
-  font: 1em sans-serif;
+  position: absolute;
+  color: yellow;
+  font: 3em sans-serif;
   font-size: medium;
+  border: 0px;
 }
 
 #score2 {
-  background-color: aliceblue;
-  font: 1em sans-serif;
+  position: absolute;
+  color: yellow;
+  font: 3em sans-serif;
   font-size: medium;
+}
+
+#winner1 {
+  position: absolute;
+  border-radius: 50px;
+  height: 500px;
+  width: 400px;
+  font: 1em sans-serif;
+  font-size: 300%;
+  color: crimson;
+}
+
+#winner2 {
+  position: absolute;
+  border-radius: 50px;
+  height: 500px;
+  width: 400px;
+  font: 1em sans-serif;
+  font-size: 300%;
+  color: dodgerblue;
 }
