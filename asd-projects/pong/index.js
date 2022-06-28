@@ -33,8 +33,6 @@ function runProgram() {
   var leftPaddle = GameObject("#leftPaddle");
   var rightPaddle = GameObject("#rightPaddle");
   console.log(ball, leftPaddle, rightPaddle);
-  var stopX = BOARD_WIDTH - $("#obj").width();
-  var stopY = BOARD_HEIGHT - $("#obj").height();
   var midPoint = {
     down: BOARD_HEIGHT / 2,
     across: BOARD_WIDTH / 2
@@ -65,16 +63,16 @@ function runProgram() {
 
   function handleKeyDown(event) {
     if (event.which === keyLeft.W) {
-      leftPaddle.speedY += -12;
+      leftPaddle.speedY += -10;
     }
     else if (event.which === keyLeft.S) {
-      leftPaddle.speedY += 12;
+      leftPaddle.speedY += 10;
     }
     else if (event.which === keyRight.UP) {
-      rightPaddle.speedY += -12;
+      rightPaddle.speedY += -10;
     }
     else if (event.which === keyRight.DOWN) {
-      rightPaddle.speedY += 12;
+      rightPaddle.speedY += 10;
     }
   }
 
@@ -103,13 +101,12 @@ function runProgram() {
     moveObject(ball);
     moveObject(rightPaddle);
     // repositionGameItem();
-    reDraw();
-    wallColision(leftPaddle);
-    wallColision(ball);
-    wallColision(rightPaddle);
     setBoundary(leftPaddle);
     setBoundary(rightPaddle);
-    setBoundary(ball);
+    reDraw();
+    wallColision(ball);
+    wallColision(leftPaddle);
+    wallColision(rightPaddle);
     collision(ball, leftPaddle);
     collision(ball, rightPaddle);
   }
@@ -133,8 +130,8 @@ function runProgram() {
     ball.x = midPoint.across;
     ball.y = midPoint.down;
 
-    ball.speedX = randomNum = (Math.random() * 5 + 2) * (Math.random() > 0.5 ? -1 : 1);
-    ball.speedY = randomNum = (Math.random() * 5 + 2) * (Math.random() > 0.5 ? -1 : 1);
+    ball.speedX = randomNum = (Math.random() * 5 + 3) * (Math.random() > 0.5 ? -1 : 1);
+    ball.speedY = randomNum = (Math.random() * 5 + 3) * (Math.random() > 0.5 ? -1 : 1);
   }
 
   function moveObject(obj) {
@@ -175,7 +172,7 @@ function runProgram() {
     if (update1Score === winNum) {
       $("#winner1").css({
         top: 0,
-        left: 200
+        left: 220
       }).text("Player 1 wins");
       endGame();
       console.log($("#winner1"));
@@ -183,7 +180,7 @@ function runProgram() {
     if (update2Score === winNum) {
       $("#winner2").css({
         top: 0,
-        left: 200
+        left: 220
       }).text("Player 2 wins");
       endGame();
       console.log($("#winner2"));
@@ -212,47 +209,19 @@ function runProgram() {
 
   }
   function setBoundary(obj) { // keeps the objects in bounds
-    var stopBX = BOARD_WIDTH - $("#ball").width();
-    var stopBY = BOARD_HEIGHT - $("ball").height();
-    var stopLX = BOARD_WIDTH - $("#leftPaddle").width();
-    var stopLY = BOARD_HEIGHT - $("#leftPaddle").height();
-    var stopRX = BOARD_WIDTH - $("#rightPaddle").width();
-    var stopRY = BOARD_HEIGHT - $("#rightPaddle").height();
-    if (ball.y >= stopBY) {
-      ball.y = stopBY;
+    var stopX = BOARD_WIDTH - $(obj.id).width();
+    var stopY = BOARD_HEIGHT - $(obj.id).height();
+    if (obj.y > stopY) {
+      obj.y = stopY;
     }
-    if (leftPaddle.y >= stopLY) {
-      leftPaddle.y = stopLY;
+    if (obj.x > stopX) {
+      obj.x = stopX;
     }
-    if (rightPaddle.y >= stopRY) {
-      rightPaddle.y = stopRY;
+    if (obj.y < 0) {
+      obj.y = 0;
     }
-    if (rightPaddle.x >= stopRX) {
-      rightPaddle.x = stopRX;
-    }
-    if (leftPaddle.x >= stopLX) {
-      leftPaddle.x = stopLX;
-    }
-    if (ball.x >= stopBX) {
-      ball.x = stopBX;
-    }
-    if (ball.y <= 0) {
-      ball.y = 0;
-    }
-    if (rightPaddle.y <= 0) {
-      rightPaddle.y = 0;
-    }
-    if (leftPaddle.y <= 0) {
-      leftPaddle.y = 0;
-    }
-    if (ball.x <= 0) {
-      ball.x = 0;
-    }
-    if (leftPaddle.x <= 0) {
-      leftPaddle.x = 0;
-    }
-    if (rightPaddle.x <= 0) {
-      rightPaddle.x = 0;
+    if (obj.x < 0) {
+      obj.x = 0;
     }
   }
 

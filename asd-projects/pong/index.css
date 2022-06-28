@@ -1,5 +1,5 @@
 body {
-  background-color: darkgreen;
+  background-color: rgb(221, 193, 11);
 }
 
 #board {
@@ -12,7 +12,7 @@ body {
 
 #leftPaddle {
   /* appearance */
-  background-color: white;
+  background-color: rgb(237, 23, 23);
   width: 20px;
   height: 80px;
   border-radius: 20px;
@@ -25,7 +25,7 @@ body {
 
 #rightPaddle {
   /* appearance */
-  background-color: white;
+  background-color: rgb(58, 21, 243);
   width: 20px;
   height: 80px;
   border-radius: 20px;
@@ -51,17 +51,17 @@ body {
 
 #score1 {
   position: absolute;
-  color: yellow;
+  color: rgb(197, 36, 4);
   font: 3em sans-serif;
-  font-size: medium;
+  font-size: large;
   border: 0px;
 }
 
 #score2 {
   position: absolute;
-  color: yellow;
+  color: rgb(0, 38, 255);
   font: 3em sans-serif;
-  font-size: medium;
+  font-size: large;
 }
 
 #winner1 {
