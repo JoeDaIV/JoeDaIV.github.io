@@ -14,7 +14,6 @@ function runProgram() {
   const BOARD_HEIGHT = $("#board").height();
 
   // Game Item Objects
-  // debugger;
   function GameObject($id) {
     var obj = {};
     obj.id = $id;
@@ -28,11 +27,10 @@ function runProgram() {
     return obj;
   }
 
-
+// variable pen
   var ball = GameObject("#ball");
   var leftPaddle = GameObject("#leftPaddle");
   var rightPaddle = GameObject("#rightPaddle");
-  console.log(ball, leftPaddle, rightPaddle);
   var midPoint = {
     down: BOARD_HEIGHT / 2,
     across: BOARD_WIDTH / 2
@@ -60,8 +58,8 @@ function runProgram() {
   ////////////////////////////////////////////////////////////////////////////////
   ///////////////////////// CORE LOGIC ///////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////// 
-
-  function handleKeyDown(event) {
+ // movement interactions
+  function handleKeyDown(event) { // sets the speed for objects when pressing a button
     if (event.which === keyLeft.W) {
       leftPaddle.speedY += -10;
     }
@@ -76,7 +74,7 @@ function runProgram() {
     }
   }
 
-  function handleKeyUp(event) {
+  function handleKeyUp(event) { // sets the speed for objects when releasing a button
     if (event.which === keyLeft.W) {
       leftPaddle.speedY = 0;
     }
@@ -100,13 +98,10 @@ function runProgram() {
     moveObject(leftPaddle);
     moveObject(ball);
     moveObject(rightPaddle);
-    // repositionGameItem();
     setBoundary(leftPaddle);
     setBoundary(rightPaddle);
     reDraw();
-    wallColision(ball);
-    wallColision(leftPaddle);
-    wallColision(rightPaddle);
+    ballColision(ball);
     collision(ball, leftPaddle);
     collision(ball, rightPaddle);
   }
@@ -121,12 +116,7 @@ function runProgram() {
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
 
-  function repositionGameItem() {
-    leftPaddle.y += leftPaddle.speedY;
-    rightPaddle.y += rightPaddle.speedY;
-  }
-
-  function startBall() {
+  function startBall() { // sets the ball objects respawn point and initial speed
     ball.x = midPoint.across;
     ball.y = midPoint.down;
 
@@ -134,17 +124,14 @@ function runProgram() {
     ball.speedY = randomNum = (Math.random() * 5 + 3) * (Math.random() > 0.5 ? -1 : 1);
   }
 
-  function moveObject(obj) {
+  function moveObject(obj) { // sets speed for an object
     obj.x += obj.speedX;
     obj.y += obj.speedY;
     $(obj.id).css("left", obj.x);
     $(obj.id).css("top", obj.y);
   }
 
-  function wallColision(obj) {
-    if (obj.y >= BOARD_HEIGHT || obj.y <= 0) {
-      obj.speedY = 0;
-    }
+  function ballColision(obj) { // makes the ball bounce and detects whether it has hit the goals
     if (obj.x >= BOARD_WIDTH || obj.x <= 0) {
       obj.speedX = 0;
       bScore(ball);
@@ -156,29 +143,26 @@ function runProgram() {
 
   }
 
-  function bScore(obj) { // 
+  function bScore(obj) { // sets where the goals are and if hit gives the player a point
     if (obj.x >= BOARD_WIDTH) {
-      update1Score = update1Score + 1;
-      $("#score1").text(update1Score);
-      startBall();
-      //  console.log(5);
+      update1Score = update1Score + 1; // updates player score
+      $("#score1").text(update1Score); // updates player score text
+      startBall(); // resets the ball
     }
     if (obj.x <= 0) {
       update2Score = update2Score + 1;
       $("#score2").text(update2Score);
       startBall();
-      //  console.log(7);
     }
-    if (update1Score === winNum) {
-      $("#winner1").css({
+    if (update1Score === winNum) { // checks to see who wins
+      $("#winner1").css({ // makes player1
         top: 0,
         left: 220
       }).text("Player 1 wins");
       endGame();
-      console.log($("#winner1"));
     }
-    if (update2Score === winNum) {
-      $("#winner2").css({
+    if (update2Score === winNum) { // checks to see who wins
+      $("#winner2").css({ // makes player2 
         top: 0,
         left: 220
       }).text("Player 2 wins");
@@ -189,7 +173,7 @@ function runProgram() {
   }
 
 
-  function collision(obj1, obj2) { // bounces the ball away when it comes into contact with the ball
+  function collision(obj1, obj2) { // bounces the ball away when it comes into contact with the paddles
     obj1.right = obj1.x + obj1.width;
     obj1.left = obj1.x;
     obj1.top = obj1.y;
@@ -208,19 +192,19 @@ function runProgram() {
 
 
   }
-  function setBoundary(obj) { // keeps the objects in bounds
+  function setBoundary(obj) { // keeps the paddles in bounds
     var stopX = BOARD_WIDTH - $(obj.id).width();
     var stopY = BOARD_HEIGHT - $(obj.id).height();
-    if (obj.y > stopY) {
+    if (obj.y >= stopY) {
       obj.y = stopY;
     }
-    if (obj.x > stopX) {
+    if (obj.x >= stopX) {
       obj.x = stopX;
     }
-    if (obj.y < 0) {
+    if (obj.y <= 0) {
       obj.y = 0;
     }
-    if (obj.x < 0) {
+    if (obj.x <= 0) {
       obj.x = 0;
     }
   }
