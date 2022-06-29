@@ -23,21 +23,27 @@ function runProgram() {
     "D": 68
   }
 
-  var xPosition = 0;
-  var xPosition2 = 0;
-  var yPosition = 0;
-  var yPosition2 = 0;
-  var xSpeed = 0;
-  var xSpeed2 = 0
-  var ySpeed = 0;
-  var ySpeed2 = 0;
+  function Walkers($id) {
+    var walker = {};
+    walker.id = $id;
+    walker.y = parseFloat($($id).css("top"));
+    walker.x = parseFloat($($id).css("left"));
+    walker.speedX = 0;
+    walker.speedY = 0;
+    walker.width = $($id).width();
+    walker.height = $($id).height();
+    return walker;
+  }
+
+
+  var walker1 = Walkers("#walker1");
+  var walker2 = Walkers("#tag2");
+  console.log(walker1);
   var board = jQuery("#board");
   var boardWidth = board.width();
   var boardHeight = board.height();
-  console.log(walker1.css);
-  var stopX = boardWidth - $("#walker1").width();
-  var stopY = boardHeight - $("#walker1").height();
-
+  var stopX = boardWidth - walker1.width;
+  var stopY = boardHeight - walker1.height;
   // Game Item Objects
 
 
@@ -53,56 +59,56 @@ function runProgram() {
   // core logic 
   function handleKeyDown(event) { // tells the gameItems to start moving
     if (event.which === keyRight.UP) {
-      ySpeed = -5;
+      walker1.speedY = -5;
     }
     else if (event.which === keyRight.DOWN) {
-      ySpeed = 5;
+      walker1.speedY= 5;
     }
     else if (event.which === keyRight.LEFT) {
-      xSpeed = -5;
+      walker1.speedX = -5;
     }
     else if (event.which === keyRight.RIGHT) {
-      xSpeed = 5;
+      walker1.speedX = 5;
     }
     else if (event.which === keyLeft.A) {
-      xSpeed2 = 5;
+      walker2.speedX = -5;
     }
     else if (event.which === keyLeft.D) {
-      xSpeed2 = -5;
+      walker2.speedX = 5;
     }
     else if (event.which === keyLeft.W) {
-      ySpeed2 = -5;
+      walker2.speedY= -5;
     }
     else if (event.which === keyLeft.S) {
-      ySpeed2 = 5;
+      walker2.speedY= 5;
     }
 
   }
   function handleKeyUp(event) { // tells the gameItems when to stop moving
     if (keyRight.UP === event.which) {
-      ySpeed = 0;
-    } 
+      walker1.speedY = 0;
+    }
     if (keyRight.DOWN === event.which) {
-      ySpeed = 0;
-    } 
+      walker1.speedY = 0;
+    }
     if (keyRight.LEFT === event.which) {
-      xSpeed = 0;
-    } 
+      walker1.speedX = 0;
+    }
     if (keyRight.RIGHT === event.which) {
-      xSpeed = 0;
-    } 
+      walker1.speedX = 0;
+    }
     if (keyLeft.W === event.which) {
-      ySpeed2 = 0;
-    } 
+      walker2.speedY = 0;
+    }
     if (keyLeft.S === event.which) {
-      ySpeed2 = 0;
+      walker2.speedY = 0;
     }
     if (keyLeft.A === event.which) {
-      xSpeed2 = 0;
-    } 
+      walker2.speedX = 0;
+    }
     if (keyLeft.D === event.which) {
-      xSpeed2 = 0;
-    } 
+      walker2.speedX = 0;
+    }
   }
 
   /* 
@@ -110,10 +116,12 @@ function runProgram() {
   by calling this function and executing the code inside.
   */
   function newFrame() {
-    redrawGameItem();
-    repositionGameItem();
-    setBoundary();
-
+    redrawGameItem(walker2);
+    repositionGameItem(walker2);
+    setBoundary(walker2);
+    redrawGameItem(walker1);
+    repositionGameItem(walker1);
+    setBoundary(walker1);
   }
 
   /* 
@@ -135,70 +143,42 @@ function runProgram() {
     // turn off event handlers
     $(document).off();
   }
-  function repositionGameItem() { // keeps the gameItems moving and tells them when and if they need to stop
-    xPosition += xSpeed;
-    yPosition += ySpeed;
-    xPosition2 += xSpeed2;
-    yPosition2 += ySpeed2;
-    if (xPosition >= boardWidth) {
-      xSpeed = 0;
-    }
-    if (yPosition >= boardHeight) {
-      ySpeed = 0;
-    }
-    if (xPosition <= 0) {
-      xSpeed = 0;
-    }
-    if (yPosition <= 0) {
-      ySpeed = 0;
-    }
-    if (yPosition2 >= boardHeight) {
-      ySpeed2 = 0;
-    }
-    if (xPosition2 >= boardWidth) {
-      xSpeed2 = 0;
-    }
-    if (yPosition2 <= 0) {
-      ySpeed2 = 0;
-    }
-    if (xPosition2 <= 0) {
-      xSpeed2 = 0;
-    }
+  function repositionGameItem(walker) { // keeps the gameItems moving and tells them when and if they need to stop
+    walker.y += walker.speedY;
+    walker.x += walker.speedX;
 
+    if (walker.x >= boardWidth) {
+      walker.speedX = 0;
+    }
+    if (walker.y >= boardHeight) {
+      walker.speedY = 0;
+    }
+    if (walker.x <= 0) {
+      walker.speedX = 0;
+    }
+    if (walker.y <= 0) {
+      walker.speedY = 0;
+    }
   }
-  function setBoundary() { // creates a boundary to keep the gameItems inside the box 
-    if(xPosition > stopX){
-      xPosition = stopX;
+  function setBoundary(walker) { // creates a boundary to keep the gameItems inside the box 
+    if (walker.x > stopX) {
+      walker.x = stopX;
     }
-    if(yPosition > stopY){
-      yPosition = stopY;
+    if (walker.y > stopY) {
+      walker.y = stopY;
     }
-    if(xPosition2 > stopX){
-      xPosition2 = stopX;
+    if (walker.x < 0) {
+      walker.x = 0;
     }
-    if(yPosition2 > stopY){
-      yPosition2 = stopY;
-    }
-    if(xPosition < 0){
-      xPosition = 0;
-    }
-    if(yPosition < 0){
-      yPosition = 0;
-    }
-    if(xPosition2 < 0){
-      xPosition2 = 0;
-    }
-    if(yPosition2 < 0){
-      yPosition2 = 0;
+    if (walker.y < 0) {
+      walker.y = 0;
     }
 
   }
 
-  function redrawGameItem() { // gives the gameItems a respawn position
-    $("#walker1").css("left", xPosition);
-    $("#walker1").css("top", yPosition);
-    $("#tag2").css("right", xPosition2);
-    $("#tag2").css("top", yPosition2);
+  function redrawGameItem(walker) { // gives the gameItems a respawn position
+    $(walker.id).css("left", walker.x);
+    $(walker.id).css("top", walker.y);
   }
 }
 
