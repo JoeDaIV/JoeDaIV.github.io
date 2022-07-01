@@ -100,7 +100,9 @@ function runProgram() {
     moveObject(rightPaddle);
     setBoundary(leftPaddle);
     setBoundary(rightPaddle);
-    reDraw();
+    reDraw(leftPaddle);
+    reDraw(rightPaddle);
+    reDraw(ball);
     ballColision(ball);
     collision(ball, leftPaddle);
     collision(ball, rightPaddle);
@@ -132,14 +134,22 @@ function runProgram() {
   }
 
   function ballColision(obj) { // makes the ball bounce and detects whether it has hit the goals
+    stopY = BOARD_HEIGHT - $(obj.id).height();
     if (obj.x >= BOARD_WIDTH || obj.x <= 0) {
       obj.speedX = 0;
       bScore(ball);
     }
-    if (ball.y >= BOARD_HEIGHT || ball.y <= 0) {
+    if (ball.y >= stopY) {
+      ball.y = stopY;
       ball.y -= ball.speedY;
       ball.speedY *= -1;
     }
+    if (ball.y <= 0) {
+      ball.y = 0;
+      ball.y -= ball.speedY;
+      ball.speedY *= -1;
+    }
+    
 
   }
 
@@ -212,11 +222,11 @@ function runProgram() {
   function reDraw() { // makes a respawn position
 
     $(rightPaddle.id).css("top", rightPaddle.y);
-    $("#rightPaddle").css("left", rightPaddle.x);
+    $(rightPaddle.id).css("left", rightPaddle.x);
     $(leftPaddle.id).css("top", leftPaddle.y);
     $(leftPaddle.id).css("left", leftPaddle.x);
-    $("#ball").css("top", ball.y);
-    $("#ball").css("left", ball.x);
+    $(ball.id).css("top", ball.y);
+    $(ball.id).css("left", ball.x);
   }
 
 
