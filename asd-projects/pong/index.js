@@ -12,8 +12,8 @@ function runProgram() {
   const FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
   const BOARD_WIDTH = $("#board").width();
   const BOARD_HEIGHT = $("#board").height();
-  let runProgram = false;
-  let startButton;
+ // let runProgram = false;
+ // let startButton;
 
 
   // Game Item Objects
