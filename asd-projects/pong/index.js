@@ -12,6 +12,9 @@ function runProgram() {
   const FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
   const BOARD_WIDTH = $("#board").width();
   const BOARD_HEIGHT = $("#board").height();
+  let runProgram = false;
+  let startButton;
+
 
   // Game Item Objects
   function GameObject($id) {
@@ -27,7 +30,8 @@ function runProgram() {
     return obj;
   }
 
-// variable pen
+  // variable pen
+
   var ball = GameObject("#ball");
   var leftPaddle = GameObject("#leftPaddle");
   var rightPaddle = GameObject("#rightPaddle");
@@ -58,7 +62,7 @@ function runProgram() {
   ////////////////////////////////////////////////////////////////////////////////
   ///////////////////////// CORE LOGIC ///////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////// 
- // movement interactions
+  // movement interactions
   function handleKeyDown(event) { // sets the speed for objects when pressing a button
     if (event.which === keyLeft.W) {
       leftPaddle.speedY += -10;
@@ -106,6 +110,8 @@ function runProgram() {
     ballColision(ball);
     collision(ball, leftPaddle);
     collision(ball, rightPaddle);
+    setPlace(winner1);
+    setPlace(winner2);
   }
   /* 
    Called in response to events.
@@ -149,7 +155,7 @@ function runProgram() {
       ball.y -= ball.speedY;
       ball.speedY *= -1;
     }
-    
+
 
   }
 
@@ -166,16 +172,16 @@ function runProgram() {
     }
     if (update1Score === winNum) { // checks to see who wins
       $("#winner1").css({ // makes player1
-        top: 0,
-        left: 220
-      }).text("Player 1 wins");
+      top: 0,
+      left: 460
+    }).text("Player 1 wins");
       endGame();
     }
     if (update2Score === winNum) { // checks to see who wins
-      $("#winner2").css({ // makes player2 
+      $("#winner2").css({ // makes player2
         top: 0,
-        left: 220
-      }).text("Player 2 wins");
+        left: 460
+     }).text("Player 2 wins");
       endGame();
       console.log($("#winner2"));
     }
@@ -217,6 +223,11 @@ function runProgram() {
     if (obj.x <= 0) {
       obj.x = 0;
     }
+  }
+
+  function setPlace(obj){
+    midPoint.across
+    midPoint.down
   }
 
   function reDraw() { // makes a respawn position
