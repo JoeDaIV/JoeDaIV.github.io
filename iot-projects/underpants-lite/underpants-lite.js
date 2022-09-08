@@ -30,8 +30,17 @@ var _ = {};
 * _.typeOf("javascript") -> "string"
 * _.typeOf([1,2,3]) -> "array"
 */
-
-
+_.typeOf = function(value) {
+    console.log({value});
+    if(Array.isArray(value) === true){
+        return "array";
+    }
+    if(value === null){
+        return "null";
+    }
+    return typeof value;
+}
+_.typeOf("hello");
 /** _.first
 * Arguments:
 *   1) An array
@@ -49,7 +58,27 @@ var _ = {};
 *   _.first(["a", "b", "c"], 1) -> "a"
 *   _.first(["a", "b", "c"], 2) -> ["a", "b"]
 */
+_.first = function(array, number) {
+    console.log({array, number})
+    if(number <= 0){
+    return [];
+    }
+    if (Array.isArray(array) === false) {
+        return array;
+    }  
+    if(number >= array.length) {
+        return array;
+    }
+    if (typeof number !== "number") {
+        return array[0];
+    }
 
+    var result = [];
+    for(var i = 0; i < number; i++){
+        result.push(array[i]);
+    }
+    return result;
+};
 
 /** _.last
 * Arguments:
