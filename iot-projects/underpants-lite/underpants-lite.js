@@ -64,7 +64,7 @@ _.first = function(array, number) {
     return [];
     }
     if (Array.isArray(array) === false) {
-        return array;
+        return [];
     }  
     if(number >= array.length) {
         return array;
@@ -97,7 +97,26 @@ _.first = function(array, number) {
 *   _.last(["a", "b", "c"], 1) -> "c"
 *   _.last(["a", "b", "c"], 2) -> ["b", "c"]
 */
-
+_.last = function(array, number) {
+    if(number <= 0){
+        return [];
+        }
+        if (Array.isArray(array) === false) {
+            return [];
+        }  
+        if(number >= array.length) {
+            return array;
+        }
+        if (typeof number !== "number") {
+            return array[array.length - 1];
+        } 
+        var result = [];
+        for(var i = 0; i < number; i++){
+            result.slice[0](-2);
+        }
+            return result;
+       
+}
 
 /** _.indexOf
 * Arguments:
@@ -114,7 +133,15 @@ _.first = function(array, number) {
 *   _.indexOf(["a","b","c"], "c") -> 2
 *   _.indexOf(["a","b","c"], "d") -> -1
 */
-
+_.indexOf = function(array, target) {
+    var result = -1;
+    _.each(array, function(el, index) {
+        if (el === target && result === -1) {
+            result = index;
+        }
+    });
+    return result;
+};
 
 /** _.contains
 * Arguments:
@@ -130,7 +157,14 @@ _.first = function(array, number) {
 *   _.contains([1,"two", 3.14], "two") -> true
 *   _.contains([1,"two", 3.14], "three") -> false
 */
-
+_.contains = function(array, value) {
+    for (var i = 0; i < array.length; i++) {
+        if (array[i] === value) {
+            return true;
+        }
+    }
+    return false;
+}
 
 /** _.each
 * Arguments:
@@ -147,7 +181,17 @@ _.first = function(array, number) {
 *   _.each(["a","b","c"], function(e,i,a){ console.log(e); });
 *      -> should log "a" "b" "c" to the console
 */
-
+_.each = function(collection, iterator) {
+    if (Array.isArray(collection)) {
+        for (var i = 0; i < collection.length; i++)
+            iterator(collection[i], i, collection);
+    } else if (collection instanceof Object) {
+        for (var key in collection)
+            iterator(collection[key], key, collection);
+    } else if (collection === null) {
+        return collection;
+    }
+}
 
 /** _.filter
 * Arguments:
@@ -165,7 +209,15 @@ _.first = function(array, number) {
 * Extra Credit:
 *   use _.each in your implementation
 */
-
+_.filter = function(collection, test) {
+    var arr = [];
+    _.each(collection, function(el, index) {
+        if (test(el, index)) {
+            arr.push(el);
+        }
+    });
+    return arr;
+};
 
 /** _.map
 * Arguments:
@@ -183,7 +235,13 @@ _.first = function(array, number) {
 * Examples:
 *   _.map([1,2,3,4], function(e){ return e * 2; }) -> [2,4,6,8]
 */
-
+_.map = function(collection, iterator) {
+    var arr = [];
+    _.each(collection, function(el, index) {
+        arr.push(iterator(el, index));
+    });
+    return arr;
+};
 
 /** _.reject
 * Arguments:
@@ -200,7 +258,11 @@ _.first = function(array, number) {
 * Examples:
 *   _.reject([1,2,3,4,5], function(e){ return e%2 === 0}; ) -> [1,3,5]
 */
-
+_.reject = function(collection, test) {
+    return _.filter(collection, function(item) {
+        return !test(item);
+    });
+};
 
 /** _.partition
 * Arguments:
@@ -243,7 +305,12 @@ _.first = function(array, number) {
 *   _.every([2,4,6], function(e){ return e % 2 === 0}; ) -> true
 *   _.every([1,2,3], function(e){ return e % 2 === 0}; ) -> false
 */
-
+_.every = function(collection, iterator) {
+    if (collection.length === 0) return true;
+    return _.reduce(collection, function(isTrue, el) {
+        return iterator ? ((!isTrue) ? false : iterator(el) ? true : false) : el;
+    }, true);
+};
 
 /** _.some
 * Arguments:
@@ -266,7 +333,12 @@ _.first = function(array, number) {
 *   _.some([1,3,5], function(e){ return e % 2 === 0}; ) -> false
 *   _.some([1,2,3], function(e){ return e % 2 === 0}; ) -> true
 */
-
+_.some = function(collection, iterator) {
+    iterator = iterator || _.identity;
+    return !_.every(collection, function(el) {
+        return !iterator(el);
+    });
+};
 
 /** _.pluck
 * Arguments:
@@ -278,7 +350,11 @@ _.first = function(array, number) {
 * Examples:
 *   _.pluck([{a: "one"}, {a: "two"}], "a") -> ["one", "two"]
 */
-
+_.pluck = function(collection, key) {
+    return _.map(collection, function(obj) {
+        return obj[key];
+    });
+};
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
