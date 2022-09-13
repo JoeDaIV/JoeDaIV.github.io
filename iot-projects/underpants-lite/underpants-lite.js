@@ -112,7 +112,7 @@ _.last = function(array, number) {
         } 
         var result = [];
         for(var i = 0; i < number; i++){
-            result.slice[0](-2);
+            return array.slice(-number);
         }
             return result;
        
@@ -212,7 +212,7 @@ _.each = function(collection, iterator) {
 _.filter = function(collection, test) {
     var arr = [];
     _.each(collection, function(el, index) {
-        if (test(el, index)) {
+        if (test(index)) {
             arr.push(el);
         }
     });
@@ -237,6 +237,10 @@ _.filter = function(collection, test) {
 */
 _.map = function(collection, iterator) {
     var arr = [];
+    if(Array.isArray(collection)){
+        for(var i = 0;i < collection.length;i++)
+        iterator()
+    }
     _.each(collection, function(el, index) {
         arr.push(iterator(el, index));
     });
