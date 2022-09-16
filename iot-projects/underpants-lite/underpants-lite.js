@@ -210,14 +210,17 @@ _.each = function(collection, iterator) {
 *   use _.each in your implementation
 */
 _.filter = function(collection, test) {
-    var arr = [];
+    var result = [];
     _.each(collection, function(el, index) {
-        if (test(index)) {
-            arr.push(el);
-        }
+        {
+            el = test(collection[index], index, collection);
+            if(el === true){
+                result.push(collection[index]);
+            }
+         }
     });
-    return arr;
-};
+    return result;
+}
 
 /** _.map
 * Arguments:
@@ -245,7 +248,7 @@ _.map = function(collection, iterator) {
         arr.push(iterator(el, index));
     });
     return arr;
-};
+}
 
 /** _.reject
 * Arguments:
@@ -266,7 +269,7 @@ _.reject = function(collection, test) {
     return _.filter(collection, function(item) {
         return !test(item);
     });
-};
+}
 
 /** _.partition
 * Arguments:
@@ -314,7 +317,7 @@ _.every = function(collection, iterator) {
     return _.reduce(collection, function(isTrue, el) {
         return iterator ? ((!isTrue) ? false : iterator(el) ? true : false) : el;
     }, true);
-};
+}
 
 /** _.some
 * Arguments:
@@ -369,3 +372,4 @@ if((typeof process !== 'undefined') &&
     // here, export any references you need for tests //
     module.exports = _;
 }
+
