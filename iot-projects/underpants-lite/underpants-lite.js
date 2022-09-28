@@ -241,12 +241,14 @@ _.filter = function(collection, test) {
 _.map = function(collection, iterator) {
     var arr = [];
     if(Array.isArray(collection)){
-        for(var i = 0;i < collection;i++)
-       return iterator(collection[i], i, collection);   
+        for(var i = 0;i < collection;i++){
+             return iterator(collection[i], i, collection);   
+        }
+      
     }
     if(typeof collection === "object"){
-    (collection, function(el, index) { 
-        arr.push(iterator());
+        (collection, function(el, index) { 
+        arr.push(iterator(el, index));
     });
 }
     return arr;
