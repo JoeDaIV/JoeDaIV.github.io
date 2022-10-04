@@ -25,13 +25,11 @@ http.createServer(function(req, res) {
             res.write("Results:\n");
             var victoryOrder = sortTogether(racers, results);
             for (var i = 0;i < victoryOrder.length;i++){
-                res.write("Green Ambler:\n"); 
-                res.write("Catalack:\n"); 
-                res.write("Steel Runner:\n");
-                res.write("G.I. Jogger:\n");
-                d = new Date();
-                var endTime = d.getTime();
+                res.write(victoryOrder[i] + ":\n"); 
+               
             }
+            d = new Date();
+            var endTime = d.getTime();
             var duration = startTime - endTime;
             res.end(duration + "\n");
         }
