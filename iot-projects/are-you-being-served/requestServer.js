@@ -13,11 +13,11 @@ request(url, function(error, response, body){
         return;
     }
     if (response.statusCode === 200 && !error === true){
-        res.writeHead(200, {'Content-Type': 'text/plain'});
+        res.writeHead(200, {'Content-Type': 'text/html'});
         res.write(body);
     }
     else {
-        res.writeHead(response.statusCode, {'Content-Type': 'text/html'});
+        res.writeHead(response.statusCode, {'Content-Type': 'text/plain'});
         error.toString("404 error");
     }
     res.end("Absoulutely not");
