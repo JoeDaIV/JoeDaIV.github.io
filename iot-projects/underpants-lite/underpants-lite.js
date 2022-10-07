@@ -267,9 +267,13 @@ _.map = function (collection, iterator) {
  *   _.reject([1,2,3,4,5], function(e){ return e%2 === 0}; ) -> [1,3,5]
  */
 _.reject = function (collection, test) {
-    return _.filter(collection, function (item) {
-        return !test(item);
-    });
+    var arr = [];
+    for(var i = 0;i < collection;i++){
+        return iterator(collection[i], i, collection);   
+   } if(!collection){
+     arr = collection[i];
+   }
+   return arr;
 };
 
 /** _.partition
