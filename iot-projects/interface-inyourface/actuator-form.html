@@ -57,15 +57,15 @@
                         method: "POST",
                         contentType: "application/x-www-form-urlencoded",
                         data: $(this).serialize(),
+					    success: function( data, textStatus, jQxhr ){
+    					$('#response pre').html( data ); 
+						},
+						error: function( jqXhr, textStatus, errorThrown ){
+   					    console.log( errorThrown ); 
+						}
                       });
 
-            		  function success(data, textStatus, jQxhr ){
-         				 $('#response pre').html( data );
-      				}
-      				function error( jqXhr, textStatus, errorThrown ){
-          			 console.log( errorThrown );
-     				 }
-
+            		  
                       e.preventDefault();
                     }
                     $("#message-form").submit(processForm);
