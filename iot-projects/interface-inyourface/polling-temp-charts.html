@@ -110,10 +110,12 @@
           // TODO 2: Update high and low records
           function updateRegRecords(value) {
             // Update the regular polling records
-            if (value > regHighest || value < regLowest) {
-              value = "reg-highest";
-              value = "reg-lowest";
-              $("#reg-highest").text("Highest recorded value is " + value);
+            if (value > regHighest) {
+              regHighest = value;
+              $("#reg-highest").text("Highest recorded value is " + value)
+            } 
+            if(value < regLowest){
+             regLowest = value;
               $("#reg-lowest").text("Lowest recorded value is " + value);
             }
           }
@@ -121,8 +123,8 @@
           function updateWSRecords(value) {
             // Update the WebSocket polling records
             if (value > wsHighest || value < wsLowest) {
-              value = "ws-highest";
-              value = "ws-lowest";
+              wsHighest = value;
+              wsLowest = value;
               $("#ws-highest").text("Highest recorded value is " + value);
               $("#ws-lowest").text("Lowest recorded value is " + value);
             }
@@ -131,13 +133,14 @@
           // TODO 3: Regular Polling
 
           function doPoll() {
-            $.getJSON(
-              "https://f3dc5044859d.ngrok.io/pi/sensors/dht/temperature",
-              function (result) {}
-            );
+            $.getJSON( "https://e2f4-64-237-85-162.ngrok.io/pi/sensors/dht/temperature", function(result) { 
+
             addDataPoint(result, regData, regChart);
             updateRegRecords(result.value);
             setTimeout(doPoll, 10000);
+          });
+
+           
           }
 
           doPoll();
@@ -146,13 +149,13 @@
           // Create a new WebSocket connection here
 
           var socket = new WebSocket(
-            "ws://f3dc5044859d.ngrok.io/pi/sensors/dht/temperature"
+            "ws://e2f4-64-237-85-162.ngrok.io/pi/sensors/dht/temperature"
           );
           socket.onmessage = function (event) {
             // Fill in the body of the onmessage function
             var result = JSON.parse(event.data);
             addDataPoint(result, wsData, wsChart);
-            updateWSRecords(value);
+            updateWSRecords(result.value);
           };
 
           socket.onerror = function (error) {
