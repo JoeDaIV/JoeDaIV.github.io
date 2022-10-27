@@ -235,18 +235,18 @@ _.filter = function (collection, test) {
  * Examples:
  *   _.map([1,2,3,4], function(e){ return e * 2; }) -> [2,4,6,8]
  */
-_.map = function (collection, iterator) {
+_.map = function (collection, iterator, obj) {
     var arr = [];
     if(Array.isArray(collection)){
-        for(var i = 0;i < collection;i++){
-             return iterator(collection[i], i, collection);   
+        for(var i = 0;i < collection.length;i++){  
+            arr.push(iterator(collection[i], i, collection));
         }
-      
+       
     }
-    if(typeof collection === "object"){
-        (collection, function(el, index) { 
-        arr.push(iterator(el, index));
-    });
+    else if(typeof collection === obj){
+        for (var key in collection){
+        arr.push(iterator(collection[key], key, collection)); 
+}
 }
     return arr;
 };
@@ -268,10 +268,11 @@ _.map = function (collection, iterator) {
  */
 _.reject = function (collection, test) {
     var arr = [];
-    for(var i = 0;i < collection;i++){
-        return iterator(collection[i], i, collection);   
-   } if(!collection){
-     arr = collection[i];
+    for(var i = 0;i < collection.length;i++){
+        test(collection[i], i, collection);   
+   } 
+   if(!collection){
+     [] = collection[i];
    }
    return arr;
 };
