@@ -242,7 +242,7 @@ _.map = function(collection, iterator) {
     var arr = [];
     if(Array.isArray(collection)){
         for(var i = 0;i < collection;i++){
-             return iterator(collection[i], i, collection);   
+             arr.push(collection[i], i, collection);   
         }
       
     }
