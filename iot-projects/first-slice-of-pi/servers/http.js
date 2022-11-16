@@ -6,7 +6,7 @@ var actuatorRoutes = require('./../routes/actuators');
 
 app.use(cors());
 
-app.use("/routes/actuators", actuatorRoutes);
+app.use("/pi/actuators", actuatorRoutes);
 app.use("/pi/sensors", sensorRoutes);
 app.get("/", function (req, res) {
   res.send("You have accessed the root");
