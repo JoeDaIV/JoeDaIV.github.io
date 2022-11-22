@@ -30,14 +30,14 @@ var _ = {};
  * _.typeOf([1,2,3]) -> "array"
  */
 _.typeOf = function (value) {
-    console.log({ value });
-    if (Array.isArray(value) === true) {
-        return "array";
-    }
-    if (value === null) {
-        return "null";
-    }
-    return typeof value;
+  console.log({ value });
+  if (Array.isArray(value) === true) {
+    return "array";
+  }
+  if (value === null) {
+    return "null";
+  }
+  return typeof value;
 };
 _.typeOf("hello");
 /** _.first
@@ -58,25 +58,25 @@ _.typeOf("hello");
  *   _.first(["a", "b", "c"], 2) -> ["a", "b"]
  */
 _.first = function (array, number) {
-    console.log({ array, number });
-    if (number <= 0) {
-        return [];
-    }
-    if (Array.isArray(array) === false) {
-        return [];
-    }
-    if (number >= array.length) {
-        return array;
-    }
-    if (typeof number !== "number") {
-        return array[0];
-    }
+  console.log({ array, number });
+  if (number <= 0) {
+    return [];
+  }
+  if (Array.isArray(array) === false) {
+    return [];
+  }
+  if (number >= array.length) {
+    return array;
+  }
+  if (typeof number !== "number") {
+    return array[0];
+  }
 
-    var result = [];
-    for (var i = 0; i < number; i++) {
-        result.push(array[i]);
-    }
-    return result;
+  var result = [];
+  for (var i = 0; i < number; i++) {
+    result.push(array[i]);
+  }
+  return result;
 };
 
 /** _.last
@@ -97,23 +97,23 @@ _.first = function (array, number) {
  *   _.last(["a", "b", "c"], 2) -> ["b", "c"]
  */
 _.last = function (array, number) {
-    if (number <= 0) {
-        return [];
-    }
-    if (Array.isArray(array) === false) {
-        return [];
-    }
-    if (number >= array.length) {
-        return array;
-    }
-    if (typeof number !== "number") {
-        return array[array.length - 1];
-    }
-    var result = [];
-    for (var i = 0; i < number; i++) {
-        return array.slice(-number);
-    }
-    return result;
+  if (number <= 0) {
+    return [];
+  }
+  if (Array.isArray(array) === false) {
+    return [];
+  }
+  if (number >= array.length) {
+    return array;
+  }
+  if (typeof number !== "number") {
+    return array[array.length - 1];
+  }
+  var result = [];
+  for (var i = 0; i < number; i++) {
+    return array.slice(-number);
+  }
+  return result;
 };
 
 /** _.indexOf
@@ -132,13 +132,13 @@ _.last = function (array, number) {
  *   _.indexOf(["a","b","c"], "d") -> -1
  */
 _.indexOf = function (array, target) {
-    var result = -1;
-    _.each(array, function (el, index) {
-        if (el === target && result === -1) {
-            result = index;
-        }
-    });
-    return result;
+  var result = -1;
+  _.each(array, function (el, index) {
+    if (el === target && result === -1) {
+      result = index;
+    }
+  });
+  return result;
 };
 
 /** _.contains
@@ -156,12 +156,12 @@ _.indexOf = function (array, target) {
  *   _.contains([1,"two", 3.14], "three") -> false
  */
 _.contains = function (array, value) {
-    for (var i = 0; i < array.length; i++) {
-        if (array[i] === value) {
-            return true;
-        }
+  for (var i = 0; i < array.length; i++) {
+    if (array[i] === value) {
+      return true;
     }
-    return false;
+  }
+  return false;
 };
 
 /** _.each
@@ -180,14 +180,14 @@ _.contains = function (array, value) {
  *      -> should log "a" "b" "c" to the console
  */
 _.each = function (collection, iterator) {
-    if (Array.isArray(collection)) {
-        for (var i = 0; i < collection.length; i++)
-            iterator(collection[i], i, collection);
-    } else if (collection instanceof Object) {
-        for (var key in collection) iterator(collection[key], key, collection);
-    } else if (collection === null) {
-        return collection;
-    }
+  if (Array.isArray(collection)) {
+    for (var i = 0; i < collection.length; i++)
+      iterator(collection[i], i, collection);
+  } else if (collection instanceof Object) {
+    for (var key in collection) iterator(collection[key], key, collection);
+  } else if (collection === null) {
+    return collection;
+  }
 };
 
 /** _.filter
@@ -207,16 +207,16 @@ _.each = function (collection, iterator) {
  *   use _.each in your implementation
  */
 _.filter = function (collection, test) {
-    var result = [];
-    _.each(collection, function (el, index) {
-        {
-            el = test(collection[index], index, collection);
-            if (el === true) {
-                result.push(collection[index]);
-            }
-        }
-    });
-    return result;
+  var result = [];
+  _.each(collection, function (el, index) {
+    {
+      el = test(collection[index], index, collection);
+      if (el === true) {
+        result.push(collection[index]);
+      }
+    }
+  });
+  return result;
 };
 
 /** _.map
@@ -235,20 +235,20 @@ _.filter = function (collection, test) {
  * Examples:
  *   _.map([1,2,3,4], function(e){ return e * 2; }) -> [2,4,6,8]
  */
-_.map = function (collection, iterator, obj) {
-    var arr = [];
-    if(Array.isArray(collection)){
-        for(var i = 0;i < collection.length;i++){  
-            arr.push(iterator(collection[i], i, collection));
-        }
-       
+_.map = function (collection, iterator) {
+  var arr = [];
+  if (Array.isArray(collection)) {
+    for (var i = 0; i < collection.length; i++) {
+      arr.push(iterator(collection[i], i, collection));
     }
-    else if(typeof collection === obj){
-        for (var key in collection){
-        arr.push(iterator(collection[key], key, collection)); 
+  }
+  if(typeof collection === "object"){
+    for (var key in collection){
+    arr.push(iterator(collection[key], key, collection)); 
 }
-}
-    return arr;
+
+  }
+  return arr;
 };
 
 /** _.reject
@@ -267,14 +267,14 @@ _.map = function (collection, iterator, obj) {
  *   _.reject([1,2,3,4,5], function(e){ return e%2 === 0}; ) -> [1,3,5]
  */
 _.reject = function (collection, test) {
-    var arr = [];
-    for(var i = 0;i < collection.length;i++){
-        test(collection[i], i, collection);   
-   } 
-   if(!collection){
-     [] = collection[i];
-   }
-   return arr;
+  var arr = [];
+  for (var i = 0; i < collection.length; i++) {
+    test(collection[i], i, collection);
+  }
+  if (!collection) {
+    [] = collection[i];
+  }
+  return arr;
 };
 
 /** _.partition
@@ -318,14 +318,14 @@ _.reject = function (collection, test) {
  *   _.every([1,2,3], function(e){ return e % 2 === 0}; ) -> false
  */
 _.every = function (collection, iterator) {
-    if (collection.length === 0) return true;
-    return _.reduce(
-        collection,
-        function (isTrue, el) {
-            return iterator ? (!isTrue ? false : iterator(el) ? true : false) : el;
-        },
-        true
-    );
+  if (collection.length === 0) return true;
+  return _.reduce(
+    collection,
+    function (isTrue, el) {
+      return iterator ? (!isTrue ? false : iterator(el) ? true : false) : el;
+    },
+    true
+  );
 };
 
 /** _.some
@@ -350,10 +350,10 @@ _.every = function (collection, iterator) {
  *   _.some([1,2,3], function(e){ return e % 2 === 0}; ) -> true
  */
 _.some = function (collection, iterator) {
-    iterator = iterator || _.identity;
-    return !_.every(collection, function (el) {
-        return !iterator(el);
-    });
+  iterator = iterator || _.identity;
+  return !_.every(collection, function (el) {
+    return !iterator(el);
+  });
 };
 
 /** _.pluck
@@ -367,9 +367,9 @@ _.some = function (collection, iterator) {
  *   _.pluck([{a: "one"}, {a: "two"}], "a") -> ["one", "two"]
  */
 _.pluck = function (collection, key) {
-    return _.map(collection, function (obj) {
-        return obj[key];
-    });
+  return _.map(collection, function (obj) {
+    return obj[key];
+  });
 };
 
 //////////////////////////////////////////////////////////////////////
@@ -377,9 +377,9 @@ _.pluck = function (collection, key) {
 //////////////////////////////////////////////////////////////////////
 
 if (
-    typeof process !== "undefined" &&
-    typeof process.versions.node !== "undefined"
+  typeof process !== "undefined" &&
+  typeof process.versions.node !== "undefined"
 ) {
-    // here, export any references you need for tests //
-    module.exports = _;
+  // here, export any references you need for tests //
+  module.exports = _;
 }
