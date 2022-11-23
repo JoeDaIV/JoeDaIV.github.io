@@ -265,12 +265,14 @@ _.map = function (collection, iterator) {
  * Examples:
  *   _.reject([1,2,3,4,5], function(e){ return e%2 === 0}; ) -> [1,3,5]
  */
-_.reject = function (collection) {
+_.reject = function (collection, test) {
   var arr = [];
-  _.each(collection, function (test) {
-    if (!collection) {
-      test(collection[i], i, collection);
+  _.each(collection, function(i, tr) {
+    {
+      tr = test(collection[i], i, collection);
+      if (collection !== true) {
       arr.push(collection[i]);
+      }
     }
   });
   return arr;
