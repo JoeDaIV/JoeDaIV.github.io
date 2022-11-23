@@ -235,21 +235,17 @@ _.filter = function (collection, test) {
  * Examples:
  *   _.map([1,2,3,4], function(e){ return e * 2; }) -> [2,4,6,8]
  */
-_.map = function (collection, iterator, obj) {
-    var arr = [];
-    if(Array.isArray(collection)){
-        for(var i = 0;i < collection;i++){
-             arr.push(collection[i], i, collection);   
-        for(var i = 0;i < collection.length;i++){  
-            arr.push(iterator(collection[i], i, collection));
-        }
-       
+_.map = function (collection, iterator) {
+  var arr = [];
+  if (Array.isArray(collection)) {
+    for (var i = 0; i < collection; i++) {
+      arr.push(collection[i], i, collection);
     }
-   if(typeof collection === obj){
-        for (var key in collection){
-        arr.push(iterator(collection[key], key, collection)); 
-}
-
+  }
+  if (typeof collection === "object") {
+    for (var key in collection) {
+      arr.push(iterator(collection[key], key, collection));
+    }
   }
   return arr;
 };
@@ -269,14 +265,14 @@ _.map = function (collection, iterator, obj) {
  * Examples:
  *   _.reject([1,2,3,4,5], function(e){ return e%2 === 0}; ) -> [1,3,5]
  */
-_.reject = function (collection, test) {
+_.reject = function (collection) {
   var arr = [];
-  for (var i = 0; i < collection.length; i++) {
-    test(collection[i], i, collection);
-  }
-  if (!collection) {
-    [] = collection[i];
-  }
+  _.each(collection, function (test) {
+    if (!collection) {
+      test(collection[i], i, collection);
+      arr.push(collection[i]);
+    }
+  });
   return arr;
 };
 
@@ -380,10 +376,9 @@ _.pluck = function (collection, key) {
 //////////////////////////////////////////////////////////////////////
 
 if (
-    typeof process !== "undefined" &&
-    typeof process.versions.node !== "undefined"
-) 
-{
-    // here, export any references you need for tests //
-    module.exports = _;
-}}
+  typeof process !== "undefined" &&
+  typeof process.versions.node !== "undefined"
+) {
+  // here, export any references you need for tests //
+  module.exports = _;
+}
