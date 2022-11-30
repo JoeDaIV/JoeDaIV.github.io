@@ -267,10 +267,10 @@ _.map = function (collection, iterator) {
  */
 _.reject = function (collection, test) {
   var arr = [];
-  _.each(collection, function(i, tr) {
+  _.each(collection, function(el, i, collection) {
     {
-      tr = test(collection[i], i, collection);
-      if (collection !== tr) {
+     var tr = test(el, i, collection);
+      if (true !== tr) {
       arr.push(collection[i]);
       }
     }
