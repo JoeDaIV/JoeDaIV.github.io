@@ -270,7 +270,7 @@ _.reject = function (collection, test) {
   _.each(collection, function(i, tr) {
     {
       tr = test(collection[i], i, collection);
-      if (collection !== true) {
+      if (collection !== tr) {
       arr.push(collection[i]);
       }
     }
