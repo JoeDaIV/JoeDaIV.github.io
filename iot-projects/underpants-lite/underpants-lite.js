@@ -267,11 +267,11 @@ _.map = function (collection, iterator) {
  */
 _.reject = function (collection, test) {
   var arr = [];
-  _.each(collection, function(el, i, collection) {
+  _.each(collection, function (el, i, collection) {
     {
-     var tr = test(el, i, collection);
+      var tr = test(el, i, collection);
       if (true !== tr) {
-      arr.push(collection[i]);
+        arr.push(collection[i]);
       }
     }
   });
@@ -318,15 +318,20 @@ _.reject = function (collection, test) {
  *   _.every([2,4,6], function(e){ return e % 2 === 0}; ) -> true
  *   _.every([1,2,3], function(e){ return e % 2 === 0}; ) -> false
  */
-_.every = function (collection, iterator) {
-  if (collection.length === 0) return true;
-  return _.reduce(
-    collection,
-    function (isTrue, el) {
-      return iterator ? (!isTrue ? false : iterator(el) ? true : false) : el;
-    },
-    true
-  );
+_.every = function (collection, collect) {
+  if (Array.isArray(collection)) {
+    for (var i = 0; i < collection; i++) {
+    collection[i], i, collection;
+    }
+  }
+  if (typeof collection === "object") {
+    for (var key in collection) {
+    collection[key], key, collection;
+    }
+  }
+  function collect(isTrue, el) {
+    return iterator ? (!isTrue ? false : iterator(el) ? true : false) : el;
+  } true;
 };
 
 /** _.some
