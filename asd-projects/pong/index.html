@@ -13,13 +13,17 @@
 </head>
 
 <body>
+  <div></div>
   <div id='board'>
     <div id="leftPaddle"> </div>
     <div id="rightPaddle"> </div>
     <div id="ball"> </div>
     <div id="winner1"></div>
     <div id="winner2"></div>
+  <div id = "start-screen" class = "screen" style = "display: block;">
+  <button onclick="startGame()">Start Game</button>
   </div>
+  <canvas id= "canvas" style=" display:none"></canvas>
   <h2> Player1 score:<div id='score1'></div>
   </h2>
   <h2> Player2 score:<div id='score2'></div>
