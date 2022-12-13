@@ -239,7 +239,9 @@ function runProgram() {
     $(ball.id).css("top", ball.y);
     $(ball.id).css("left", ball.x);
   }
-
+document.onload = function() {
+  
+}
 
   function endGame() {
     // stop the interval timer
