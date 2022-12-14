@@ -8,7 +8,7 @@ router.route("/").get(function (req, res, next) {
 router.route("/leds").get(function (req, res, next) {
   res.send(resources.pi.sensors);
 });
-router.route('/leds/:id').get(req.result).put(req.body.value);
+router.route('/leds/:id').get().put();
 ledsPlugin.switchOnOff[req.params.id](req.body.value);
 next();
 module.exports = router;
