@@ -1,26 +1,32 @@
-const json2html = require('node-json2html');
-let transform = {'<>': 'div', 'html': [
-	{'<>': 'p', 'html': [
-		{'<>': 'h1', 'html': 'name: '},
-		{'<>': 'p', 'html': '${name}'}
-	]},
-	{'<>': 'p', 'html': [
-		{'<>': 'h1', 'html': 'description: '},
-		{'<>': 'p', 'html': '${description}'}
-	]},
-	{'<>': 'p', 'html': [
-		{'<>': 'h1', 'html': 'value: '},
-		{'<>': 'p', 'html': '${value}'}
-	]}
-]};
+var json2html = require('node-json2html');
+
 module.exports = function() {
 	return function (req, res, next) {
-		// TODO 2: Create the converter function
-		if (req.result) {}
+		if (req.result) {
+			if (req.accepts('html')) {
+				var transform = {'<>': 'div', 'html': [
+					{'<>': 'p', 'html': [
+						{'<>': 'b', 'html': 'Name: '},
+						{'<>': 'p', 'html': '${name}'}
+					]},
+					{'<>': 'p', 'html': [
+						{'<>': 'b', 'html': 'Description: '},
+						{'<>': 'p', 'html': '${description}'}
+					]},
+					{'<>': 'p', 'html': [
+						{'<>': 'b', 'html': 'Value: '},
+						{'<>': 'p', 'html': '${value}'}
+					]},
+				]};
+				console.log("sending html");
+				res.send(json2html.transform(req.result, transform));
+				return;
+			}
+			console.log("sending json");
+			res.send(req.result);
+		}
+
+		console.log("sending nothing");
 		next();
-		if (req.accepts('html')){}
-		json2html.transform(result, transform);
-		res.send();
-		res.send(req.result);
 	};
 };
