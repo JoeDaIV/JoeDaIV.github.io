@@ -1,4 +1,4 @@
-(function(window, createjs, opspark, _) {
+(function (window, createjs, opspark, _) {
 
   // Variable declarations for libraries and the game engine
   const
@@ -35,8 +35,8 @@
   ball.x = canvas.width / 2;
   ball.y = canvas.height / 2;
   ball.xVelocity = 5;
-  ball.yVelocity = 5;
-//What does line 40-41 do?
+  ball.yVelocity = -5;
+  //What does line 40-41 do?
   // add the paddles and the ball to the view
   stage.addChild(paddlePlayer, paddleCPU, ball);
 
@@ -56,7 +56,7 @@
   // when either the Arrow Up or Arrow Down key are released, stop the paddle from moving
   function onKeyUp(event) {
     if (event.key === 'ArrowUp' ||//was this or/and? 
-     event.key === 'ArrowDown') {
+      event.key === 'ArrowDown') {
       paddlePlayer.yVelocity = 0;
     }
   }
@@ -92,15 +92,22 @@
     }
 
     // TODO 1: bounce the ball off the top
-    if (ball.y < 0 || ball.y > canvas.height - ball.y) {
-      ball.yVelocity *= -1;}
-
+    if (ball.y < 0) {
+      ball.yVelocity *= -1;
+    }
 
     // TODO 2: bounce the ball off the bottom
-
+    if(ball.y > canvas.height){
+      ball.yVelocity *= -1;
+    }
 
     // TODO 3: bounce the ball off each of the paddles
-
+     if(ball.x >= paddleCPU.x){
+      ball.xVelocity *= -1;
+     }
+     if(ball.x <= paddlePlayer.x){
+      ball.xVelocity *= -1;
+     }
 
   }
 
