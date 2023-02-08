@@ -24,7 +24,7 @@
   // Variable declarations for the paddles and the ball which are drawn using createJS (see bower_components/opspark-draw/draw.js)
   const
     paddlePlayer = createPaddle(),
-    paddleCPU = createPaddle({ x: canvas.width - 20, y: canvas.height - 100 }),
+    paddleCPU = createPaddle({ x: canvas.width - 60, y: canvas.height - 100 }),
     ball = draw.circle(20, '#CCC');
 
   // set initial properties for the paddles 
@@ -70,6 +70,10 @@
       boundsPlayer = paddlePlayer.getBounds(),
       widthPlayer = paddlePlayer.width,
       heightPlayer = paddlePlayer.height;
+      boundsBall = ball.getBounds();
+      widthBall = ball.width;
+      heightBall = ball.height;
+
 
     // Ball movement: the xVelocity and yVelocity is the distance the ball moves per update
     ball.x = ball.x + ball.xVelocity;
@@ -90,29 +94,41 @@
     } else if ((paddleCPU.y + midCPU) > (ball.y + 14)) {
       paddleCPU.y -= paddleCPU.yVelocity;
     }
+    // create boundaries
+    var stopXP = canvas.width - widthPlayer;
+    var stopXC = canvas.width - widthCPU;
+    var stopYP = canvas.height - heightPlayer;
+    var stopYC = canvas.height - heightCPU;
+    var stopXB = canvas.width - widthBall;
+    var stopYB = canvas.height - heightBall;
 
     // TODO 1: bounce the ball off the top
-    if (ball.y < 0) {
+    if(ball.y < 0) {
       ball.yVelocity *= -1;
+    }
+    if (ball.y > canvas.height - ball.height) {
+      ball.y = canvas.height - heightBall;
     }
 
     // TODO 2: bounce the ball off the bottom
-    if(ball.y > canvas.height){
+    if (ball.y > canvas.height) {
       ball.yVelocity *= -1;
     }
 
     // TODO 3: bounce the ball off each of the paddles
-     if(ball.x >= paddleCPU.x){
+    if (ball.x >= 0) {
       ball.xVelocity *= -1;
-     }
-     if(ball.x <= paddlePlayer.x){
+    }
+    if (ball.x <= paddlePlayer.x) {
       ball.xVelocity *= -1;
-     }
-
+    }
+    if (ball.x > canvas.width - ball.width) {
+      ball.x = canvas.width - widthBall;
+    }
   }
 
   // helper function that wraps the draw.rect function for easy paddle making
-  function createPaddle({ width = 20, height = 100, x = 0, y = 0, color = '#CCC' } = {}) {
+  function createPaddle({ width = 20, height = 100, x = 20, y = 0, color = '#CCC' } = {}) {
     const paddle = draw.rect(width, height, color);
     paddle.x = x;
     paddle.y = y;
