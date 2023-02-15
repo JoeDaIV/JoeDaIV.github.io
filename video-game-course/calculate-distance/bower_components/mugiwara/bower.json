@@ -1,0 +1,21 @@
+{
+  "name": "mugiwara",
+  "homepage": "https://github.com/JoeDaIV/mugiwara",
+  "authors": [
+    "JoeDaIV <Joedaiv60@gmail.com>"
+  ],
+  "description": "this is a video game library that will help us to develop games",
+  "main": "index.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "lodash": "^4.17.21"
+    
+  }
+}
