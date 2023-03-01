@@ -66,7 +66,8 @@
      * TODO 6: Check if the mouse is within the area of shapeUp, and set the 
      * alpha property of shapeUp accordingly:
      */
-
+      onmouseover === shapeUp.alpha ? 1 : 0;
+      alpha = 1;
 
     /*
      * Update the textfield with the current distance between the mouse and 
