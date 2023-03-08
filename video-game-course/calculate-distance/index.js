@@ -18,6 +18,7 @@
 
   const
     // setup the standard demo 
+    getDistance = mugiwara.phyz.getDistance,
     engine = opspark.V6().activateResize(),
     canvas = engine.getCanvas(),
     stage = engine.getStage(),
@@ -85,14 +86,6 @@
     // re-center the text each time it changes //
     textfield.x = (canvas.width - textBounds.width) / 2;
     textfield.y = canvas.height / 2 + 50;
-  }
-
-  function getDistance(pointA, pointB) {
-    const
-      distanceX = pointB.x - pointA.x,
-      distanceY = pointB.y - pointA.y,
-      distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
-    return distance;
   }
 
   // startup the engine (the tick) //
