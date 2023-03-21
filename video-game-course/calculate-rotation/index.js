@@ -1,5 +1,5 @@
 // TODO 4: add a param for your game lib last //
-(function(window, opspark) {
+(function(window, opspark, mugiwara) {
   console.log('index.js initialized!');
 
   const
@@ -9,17 +9,20 @@
     stage = engine.getStage(),
     textfield = assets.makeTextfield('Degrees: ');
   
-  stage.addChild(textfield);
+   stage.addChild(textfield);
 
   // try a different hex color if you want //
-  const ship = assets.makeShip('#4286f4');
+  console.log(stage);
   
   
   // TODO 5: Center the ship on the stage //
-  
+  const ship = assets.makeShip('#FF0000');
+
+  ship.x = canvas.width / 2;
+  ship.y = canvas.height / 2;
 
   // TODO 6: Add the ship to the stage //
-  
+  stage.addChild(ship)
 
   
   function update(event) {
@@ -53,4 +56,4 @@
     .activateTick();
 
 // TODO 3: pass your game lib last with, window.my-game-lib //
-}(window, window.opspark));
+}(window, window.opspark, window.mugiwara));
