@@ -61,7 +61,7 @@
     var a = shapeOver.x - shapeUp.x;
     var b = shapeOver.y - shapeUp.y;
     var distance = getDistance(a*a + b*b);
-
+//  two Objects mose and shapeup^^^
 
     /*
      * TODO 6: Check if the mouse is within the area of shapeUp, and set the 
