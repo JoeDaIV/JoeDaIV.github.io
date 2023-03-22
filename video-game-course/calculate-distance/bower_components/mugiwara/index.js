@@ -1,6 +1,42 @@
 (function (window, _) {
   window.mugiwara = window.mugiwara || {
-    numz: {},
+    numz: {
+      /**
+       * @param {*} pointA is the first point on screen
+       * @param {*} pointB is the second point on screen
+       * @param {number} pointA.x 
+       * @param {number} pointA.y
+       * @param {number} radians - a numeric value from the distance in radians
+       * @param {number} degrees - calculates a numeric value from radians into degrees
+       *
+       * 
+       * @returns {number} returns the degrees
+       */
+      getAngleDegrees(pointA, pointB) {
+        const
+          distanceX = pointA.x - pointB.x,
+          distanceY = pointA.y - pointB.y,
+          radians = Math.atan2(distanceY, distanceX),
+          degrees = radians * 180 / Math.PI;
+        return degrees;
+      },
+      /**
+       * @param {number} degreesToRadians calculates degrees into radians
+       * @param {*} degrees an angle
+       * @returns {number} the radian
+       */
+      degreesToRadians(degrees) {
+        return degrees * Math.PI / 180;
+      },
+      /**
+       * @param {number} radiansToDegrees calculates radians into degrees
+       * @param {*} radians the distance as a single number
+       * @returns {number} degrees
+       */
+      radiansToDegrees(radians) {
+        return radians * 180 / Math.PI;
+      },
+    },
     phyz: {
       /**
        * calculate the distance
@@ -19,35 +55,35 @@
 
           distanceY = pointB.y - pointA.y,
 
-          distance = Math.sort(distanceX * distanceX + distanceY * distanceY);
+          distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
 
         return distance;
 
 
       },
-       /**
-       * Returns an Object with basic properties utilized in a 
-       * 2D physics system. On top of simple physical properties,
-       * the body has template methods handleCollision() and update().
-       * 
-       * @param {String} type: A String, should be unique to your
-       * system, representing the type of body.
-       * @param {Object} options.
-       * @param {Number} options.velocityX: The body's velocity on the x axis.
-       * @param {Number} options.velocityY: The body's velocity on the y axis.
-       * @param {Number} options.rotationalVelocity: The body's rotational velocity.
-       * @param {Number} options.integrity: The body's integrity. 0 means the 
-       * body is no longer intact and should explode or break apart, 1 means 
-       * the body is fully intact.
-       * @param {Number} options.density: The density of the body, can be 
-       * used when calculating the force of impact of a collision, which can 
-       * then be distributed to affect the kinetic energy of the colliding bodies.
-       * @param {Number} options.volatility: The body's volatility, how unstable or
-       * explosive it may be. Can be used as a multiplyer when calculating the 
-       * force of impact of a collision.
-       * @return {Object} The body.
-       */
-       makeBody: function(type, {
+      /**
+      * Returns an Object with basic properties utilized in a 
+      * 2D physics system. On top of simple physical properties,
+      * the body has template methods handleCollision() and update().
+      * 
+      * @param {String} type: A String, should be unique to your
+      * system, representing the type of body.
+      * @param {Object} options.
+      * @param {Number} options.velocityX: The body's velocity on the x axis.
+      * @param {Number} options.velocityY: The body's velocity on the y axis.
+      * @param {Number} options.rotationalVelocity: The body's rotational velocity.
+      * @param {Number} options.integrity: The body's integrity. 0 means the 
+      * body is no longer intact and should explode or break apart, 1 means 
+      * the body is fully intact.
+      * @param {Number} options.density: The density of the body, can be 
+      * used when calculating the force of impact of a collision, which can 
+      * then be distributed to affect the kinetic energy of the colliding bodies.
+      * @param {Number} options.volatility: The body's volatility, how unstable or
+      * explosive it may be. Can be used as a multiplyer when calculating the 
+      * force of impact of a collision.
+      * @return {Object} The body.
+      */
+      makeBody: function (type, {
         velocityX = 0,
         velocityY = 0,
         rotationalVelocity = 0,
@@ -83,5 +119,7 @@
         };
       },
     },
-    };
+  };
 }(window, window._));
+
+

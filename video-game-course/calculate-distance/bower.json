@@ -19,6 +19,6 @@
   "dependencies": {
     "EaselJS": "^1.0.2",
     "V6": "^0.0.2",
-    "mugiwara": "https://github.com/JoeDaIV/mugiwara.git#^0.1.0"
+    "mugiwara": "https://github.com/JoeDaIV/mugiwara.git#^0.1.4"
   }
 }

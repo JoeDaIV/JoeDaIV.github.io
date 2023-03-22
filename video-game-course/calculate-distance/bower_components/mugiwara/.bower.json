@@ -17,15 +17,15 @@
   "dependencies": {
     "lodash": "^4.17.21"
   },
-  "version": "0.1.0",
-  "_release": "0.1.0",
+  "version": "0.1.4",
+  "_release": "0.1.4",
   "_resolution": {
     "type": "version",
-    "tag": "v0.1.0",
-    "commit": "790d64dd054b715f0ea91abf0000fbe0eb47a2ac"
+    "tag": "v0.1.4",
+    "commit": "d0a5804cb8852e81514443f38a2ea4208b24a2dc"
   },
   "_source": "https://github.com/JoeDaIV/mugiwara.git",
-  "_target": "^0.1.0",
+  "_target": "^0.1.4",
   "_originalSource": "https://github.com/JoeDaIV/mugiwara.git",
   "_direct": true
 }
