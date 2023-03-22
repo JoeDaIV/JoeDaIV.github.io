@@ -46,6 +46,7 @@
 
     // TODO 8: Set the ship's rotation property to the degrees //
 
+    
     ship.rotation = degrees;
 
     /*
