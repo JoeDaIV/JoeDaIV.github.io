@@ -1,5 +1,5 @@
 // TODO 4: add a param for your game lib last //
-(function(window, opspark, mugiwara) {
+(function (window, opspark, mugiwara) {
   console.log('index.js initialized!');
 
   const
@@ -8,13 +8,13 @@
     canvas = engine.getCanvas(),
     stage = engine.getStage(),
     textfield = assets.makeTextfield('Degrees: ');
-  
-   stage.addChild(textfield);
+
+  stage.addChild(textfield);
 
   // try a different hex color if you want //
   console.log(stage);
-  
-  
+
+
   // TODO 5: Center the ship on the stage //
   const ship = assets.makeShip('#FF0000');
 
@@ -24,7 +24,7 @@
   // TODO 6: Add the ship to the stage //
   stage.addChild(ship)
 
-  
+
   function update(event) {
     /*
      * TODO 7: Use your game lib's getAngleDegrees to get 
@@ -37,23 +37,28 @@
      * method takes two points. What do you need to do to translate
      * these values such that they're packed into a point?
      */
-    
-    
+    var mousePosition = {
+      x: stage.mouseX,
+      y: stage.mouseY
+    }
+
+    const degrees = mugiwara.numz.getAngleDegrees(ship, mousePosition);
+
     // TODO 8: Set the ship's rotation property to the degrees //
-    
-    
-    
+
+    ship.rotation = degrees;
+
     /*
      * TODO 9: Uncomment the line below to update the textfield  
      * with the current angle degrees. Degrees will be a value 
      * between π and -π, or, 180 and -180.
      */
-    // assets.updateText(textfield, `Degrees: ${degrees.toFixed(3)}°`, canvas);
+    assets.updateText(textfield, `Degrees: ${degrees.toFixed(3)}°`, canvas);
   }
 
   engine
     .addTickHandlers(update)
     .activateTick();
 
-// TODO 3: pass your game lib last with, window.my-game-lib //
+  // TODO 3: pass your game lib last with, window.my-game-lib //
 }(window, window.opspark, window.mugiwara));
