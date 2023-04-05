@@ -5,7 +5,7 @@
 
   opspark.space = {
     add(...bodies) {
-      active.push(...bodies);
+      active.push(...bodies)
       return this;
     },
     remove(body) {
