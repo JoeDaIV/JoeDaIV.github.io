@@ -1,4 +1,4 @@
-(function(window, opspark, _) {
+(function(window, opspark, mugiwara) {
   // create a namespace for the ship manager //
   _.set(opspark, 'shipManager',
     /**
@@ -51,4 +51,4 @@
         },
       };
     });
-}(window, window.opspark, window._));
+}(window, window.opspark, window.mugiwara));

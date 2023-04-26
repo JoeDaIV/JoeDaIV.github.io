@@ -1,4 +1,4 @@
-(function(window, opspark, racket) {
+(function(window, opspark, racket, mugiwara) {
   /**
    * Creates and returns the space module. Listens for SPAWN 
    * events, adding any bodies in the event
@@ -49,13 +49,16 @@
             const bodyB = active[j];
             
             // TODO 1: Calculate hit test components
-            
-            
+            const distance = mugiwara.phyz.getDistance(bodyA, bodyB);
+
+            //add the radii together
+            //distance <= sum of radii
               
             // TODO 2: Do collision check: how do we know if bodies are colliding?
-            if(/* replace with collision check */ false) {
+            if(distance <= bodyA.radius + bodyB.radius) {
               // console.log('hit!');
-              
+
+            
               // TODO 3: Calculate springToX and springToY 
               
               
@@ -78,4 +81,5 @@
       }
     };
   };
-}(window, window.opspark, window.opspark.racket));
+}(window, window.opspark, window.opspark.racket, window.mugiwara));
+
