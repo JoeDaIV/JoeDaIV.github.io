@@ -1,0 +1,31 @@
+{
+  "name": "mugiwara",
+  "homepage": "https://github.com/JoeDaIV/mugiwara",
+  "authors": [
+    "JoeDaIV <Joedaiv60@gmail.com>"
+  ],
+  "description": "this is a video game library that will help us to develop games",
+  "main": "index.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "lodash": "^4.17.21"
+  },
+  "version": "0.1.6",
+  "_release": "0.1.6",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.1.6",
+    "commit": "337f180b5e9acaf44358729ea556282826f6beac"
+  },
+  "_source": "https://github.com/JoeDaIV/mugiwara.git",
+  "_target": "^0.1.6",
+  "_originalSource": "https://github.com/JoeDaIV/mugiwara.git",
+  "_direct": true
+}

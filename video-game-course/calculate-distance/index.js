@@ -27,7 +27,7 @@
     radius = 25, // the radius of our two circles
     shapeUp = new createjs.Shape(), // the up state: the mouse is NOT intersecting
     shapeOver = new createjs.Shape(); // the over state: the mouse IS intersecting
-
+console.log(shapeUp);
   /*
    * Draw two circles, up for when the mouse is not touching it, over
    * for when the mouse is touching it. Note, the createjs API for drawing
@@ -58,17 +58,23 @@
      * TODO 5: use getDistance to calculate the distance between shapeUp and 
      * the mouse. Store the result in a variable called distance:
      */
-    var a = shapeOver.x - shapeUp.x;
-    var b = shapeOver.y - shapeUp.y;
-    var distance = getDistance(a*a + b*b);
-//  two Objects mose and shapeup^^^
+    // debugger;
+    var mouse = {
+      x: stage.mouseX,
+      y: stage.mouseY
+    }
+    var distance = getDistance(shapeUp, mouse);
+    //  two Objects mose and shapeup^^^
 
     /*
      * TODO 6: Check if the mouse is within the area of shapeUp, and set the 
      * alpha property of shapeUp accordingly:
      */
-      onmouseover === shapeUp.alpha ? 1 : 0;
-      alpha = 1;
+    if (mouse < shapeUp.radius) {
+       shapeUp.alpha ? 1 : 0;
+
+    }
+
 
     /*
      * Update the textfield with the current distance between the mouse and 
