@@ -43,6 +43,8 @@
       }
       
       function handleCollisionShip(impact) {
+        console.log(this);
+        
         if (this.integrity > 0) {
           this.integrity -= impact;
           messenger.dispatch({ type: 'DAMAGE', source: 'ship', target: this });

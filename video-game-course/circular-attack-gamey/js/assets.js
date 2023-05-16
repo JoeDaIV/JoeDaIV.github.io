@@ -126,7 +126,7 @@
           // randomized position within canvas //
           ship.x = numz.randomIntBetween(0, canvas.width);
           ship.y = numz.randomIntBetween(0, canvas.height);
-
+          console.log(ship)
           return ship;
         },
         makeOrb() {
